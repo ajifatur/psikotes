@@ -26,10 +26,10 @@
                             <tr>
                                 <th width="30"><input type="checkbox" class="form-check-input checkbox-all"></th>
                                 <th>Nama</th>
-                                <th width="80">Token</th>
                                 <th width="100">Tes</th>
                                 <th width="80">Mulai Tanggal</th>
                                 <th width="80">Sampai Tanggal</th>
+                                <th width="120">HRD</th>
                                 <th width="60">Opsi</th>
                             </tr>
                         </thead>
@@ -37,8 +37,10 @@
                             @foreach($projects as $project)
                             <tr>
                                 <td align="center"><input type="checkbox" class="form-check-input checkbox-one"></td>
-                                <td>{{ $project->name }}</td>
-                                <td>{{ $project->token }}</td>
+                                <td>
+                                    {{ $project->name }}
+                                    <div class="text-muted"><strong>Token:</strong> {{ $project->token }}</div>
+                                </td>
                                 <td>
                                     @foreach($project->tests as $key=>$test)
                                         {{ $test->name }}
@@ -59,6 +61,7 @@
                                     <br>
                                     <small class="text-muted">{{ date('H:i', strtotime($project->date_to)) }} WIB</small>
                                 </td>
+                                <td>{{ $project->user->name }}</td>
                                 <td align="center">
                                     <div class="btn-group">
                                         <a href="{{ route('admin.project.edit', ['id' => $project->id]) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Edit"><i class="bi-pencil"></i></a>

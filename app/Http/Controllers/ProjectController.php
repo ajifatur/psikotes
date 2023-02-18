@@ -177,4 +177,29 @@ class ProjectController extends Controller
         // Redirect
         return redirect()->route('admin.project.index')->with(['message' => 'Berhasil menghapus data.']);
     }
+
+    /**
+     * Check.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function check(Request $request)
+    {
+        // Check the access
+        // has_access(method(__METHOD__), Auth::user()->role_id);
+        
+        // Check the project
+        $project = Project::where('token','=',$request->token)->find($request->id);
+
+        if($project) {
+            // View
+            return view('member/project/index', [
+                'project' => $project
+            ]);
+        }
+        else {
+            return redirect()->route('member.dashboard')->with(['message' => 'Token yang Anda masukkan salah!']);
+        }
+    }
 }
