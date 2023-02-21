@@ -14,8 +14,8 @@
     <nav class="navbar navbar-expand navbar-dark bg-theme-1 fixed-top shadow-sm">
     <div class="container">
         <ul class="nav navbar-nav">
-            <li class="nav-item" style="visibility:hidden">
-                <a class="nav-link text-white fw-bold" href="/"><i class="fa fa-arrow-left"></i> <span class="d-none d-md-inline">Kembali</span></a>
+            <li class="nav-item" style="{{ Request::url() == route('member.dashboard') ? 'visibility:hidden' : '' }}">
+                <a class="nav-link text-white fw-bold" href="{{ route('member.dashboard') }}"><i class="bi-arrow-left"></i> <span class="d-none d-md-inline">Kembali</span></a>
             </li>
         </ul>
         <a class="navbar-brand mx-auto" href="/">
