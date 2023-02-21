@@ -15,21 +15,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if(Auth::guest()) {
-        return redirect()->route('auth.login');
-    }
-    else {
-        if(Auth::user()->role_id == role('member')) {
-            return redirect()->route('member.dashboard');
-        }
-        else {
-            return redirect()->route('admin.dashboard');
-        }
-    }
+    //return view('welcome');
+    return redirect()->route('auth.login');
 });
 
 \Ajifatur\Helpers\RouteExt::auth();
 \Ajifatur\Helpers\RouteExt::admin();
+
+// Guest Routes
+Route::group(['middleware' => ['faturhelper.guest']], function() {
+	Route::get('/login', function() {
+		return view('auth/login');
+	})->name('auth.login');
+    Route::post('/login', 'LoginController@authenticate');
+});
 
 Route::group(['middleware' => ['faturhelper.admin']], function() {
     // Project
