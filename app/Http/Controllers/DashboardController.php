@@ -23,7 +23,7 @@ class DashboardController extends Controller
 
         if(Auth::user()->role_id == role('member')) {
             // Get projects
-            $projects = Project::latest()->get();
+            $projects = Project::where('date_from','<=',date('Y-m-d'))->where('date_to','>=',date('Y-m-d'))->latest()->get();
             
             // View
             return view('member/dashboard/index', [

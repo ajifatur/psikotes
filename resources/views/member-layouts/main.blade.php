@@ -18,7 +18,7 @@
                 <a class="nav-link text-white fw-bold" href="{{ route('member.dashboard') }}"><i class="bi-arrow-left"></i> <span class="d-none d-md-inline">Kembali</span></a>
             </li>
         </ul>
-        <a class="navbar-brand mx-auto" href="/">
+        <a class="navbar-brand mx-auto" href="{{ route('member.dashboard') }}">
             SpandivTalk
             <!-- <img src="https://tes.psikologanda.com/assets/images/logo-2-white.png" height="40" alt="img"> -->
         </a>

@@ -15,6 +15,7 @@
             <a href="#" class="btn btn-md btn-block btn-outline-dark border-0 fw-bold py-3 my-3 btn-project" data-id="{{ $project->id }}">
                 <i class="h1 bi-clipboard"></i>
                 <p class="m-0 mb-2">{{ $project->name }}</p>
+                <p class="m-0 small fw-normal"><i class="bi-calendar2"></i> {{ date('d/m/Y',strtotime($project->date_from)) }} s.d. {{ date('d/m/Y',strtotime($project->date_to)) }}</p>
             </a>
         </div>
         @endforeach
