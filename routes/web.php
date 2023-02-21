@@ -15,8 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    //return view('welcome');
-    return redirect()->route('auth.login');
+    if(Auth::guest()) {
+        return redirect()->route('auth.login');
+    }
+    else {
+        if(Auth::user()->role_id == role('member')) {
+            return redirect()->route('member.dashboard');
+        }
+        else {
+            return redirect()->route('admin.dashboard');
+        }
+    }
 });
 
 \Ajifatur\Helpers\RouteExt::auth();
