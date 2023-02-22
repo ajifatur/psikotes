@@ -47,6 +47,12 @@ Route::group(['middleware' => ['faturhelper.admin']], function() {
     Route::get('/admin/project/edit/{id}', 'ProjectController@edit')->name('admin.project.edit');
     Route::post('/admin/project/update', 'ProjectController@update')->name('admin.project.update');
     Route::post('/admin/project/delete', 'ProjectController@delete')->name('admin.project.delete');
+
+    // Result
+    Route::get('/admin/result', 'ResultController@index')->name('admin.result.index');
+    Route::get('/admin/result/detail/{id}', 'ResultController@detail')->name('admin.result.detail');
+    Route::post('/admin/result/delete', 'ResultController@delete')->name('admin.result.delete');
+    Route::post('/admin/result/print', 'ResultController@print')->name('admin.result.print');
 });
 
 Route::group(['middleware' => ['faturhelper.nonadmin']], function() {

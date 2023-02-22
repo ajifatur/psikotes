@@ -42,7 +42,7 @@
                                     <div class="text-muted"><strong>Token:</strong> {{ $project->token }}</div>
                                 </td>
                                 <td>
-                                    @foreach($project->tests as $key=>$test)
+                                    @foreach($project->tests()->orderBy('num_order','asc')->get() as $key=>$test)
                                         {{ $test->name }}
                                         @if($key < count($project->tests)-1)
                                         <hr class="my-1">
