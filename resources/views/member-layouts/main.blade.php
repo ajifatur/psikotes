@@ -6,11 +6,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://ajifatur.github.io/assets/spandiv.min.css">
-    <link rel="stylesheet" type="text/css" href="https://tes.psikologanda.com/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://tes.spandiv.xyz/assets/css/style.css">
+    <link rel="icon" type="image/x-icon" href="https://tes.spandiv.xyz/assets/images/icon/icon connectedness.png">
     @yield('css')
-    <title>Psikotes Spandiv</title>	
+    <title>Psikotes Spandiv x Connectedness</title>	
 </head>
-<body class="bg-light">
+<body class="bg-white">
     <nav class="navbar navbar-expand navbar-dark bg-theme-1 fixed-top shadow-sm">
     <div class="container">
         <ul class="nav navbar-nav">
@@ -19,7 +20,7 @@
             </li>
         </ul>
         <a class="navbar-brand mx-auto" href="{{ route('member.dashboard') }}">
-            {{ setting('name') }}
+            <img src="https://tes.spandiv.xyz/assets/images/logo/connectedness-1.png" width="120" alt="img" style="filter: brightness(10);">
         </a>
         <ul class="nav navbar-nav">
             <li class="nav-item">
