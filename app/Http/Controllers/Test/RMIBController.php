@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Packet;
 use App\Models\Result;
 
-class DISC24Controller extends Controller
+class RMIBController extends Controller
 {    
     /**
      * Display
@@ -44,21 +44,15 @@ class DISC24Controller extends Controller
         // Get the packet
         $packet = Packet::where('test_id','=',$request->test_id)->where('status','=',1)->first();
         
-        // Set array
-        $array = [
-            'dm' => $request->Dm,
-            'im' => $request->Im,
-            'sm' => $request->Sm,
-            'cm' => $request->Cm,
-            'bm' => $request->Bm,
-            'dl' => $request->Dl,
-            'il' => $request->Il,
-            'sl' => $request->Sl,
-            'cl' => $request->Cl,
-            'bl' => $request->Bl
-        ];
-        $array['answers']['m'] = $request->y;
-        $array['answers']['l'] = $request->n;
+        // Answers
+        $array = [];
+        $array['answers'] = $request->score;
+        $array['occupations'] = $request->occupations;
+
+        // Sort array answers by key
+        foreach($array['answers'] as $key=>$answer) {
+            ksort($array['answers'][$key]);
+        }
 
         // Save the result
         $result = new Result;

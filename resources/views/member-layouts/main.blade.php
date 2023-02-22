@@ -53,13 +53,18 @@ myFunction();
 	    e.preventDefault();
 	    e.returnValue = '';
 	}
-	// Before Unload
-	window.addEventListener("beforeunload", j);
-	// Unload
-	window.addEventListener("unload", function(e){
-		console.log("Bye bye");
-	});
-
+</script>
+@if(is_int(strpos(Request::path(), 'member/test')))
+<script type="text/javascript">
+    // Before Unload
+    window.addEventListener("beforeunload", j);
+    // Unload
+    window.addEventListener("unload", function(e){
+        console.log("Bye bye");
+    });
+</script>
+@endif
+<script type="text/javascript">
 	// Next form
 	$(document).on("click", "#btn-next", function(e){
 		e.preventDefault();

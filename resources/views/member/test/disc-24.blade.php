@@ -13,7 +13,9 @@
 	<div class="row" style="margin-bottom:100px">
 	    <div class="col-12">
 		    <form id="form" method="post" action="{{ route('member.test.store', ['path' => $path]) }}">
+        		@csrf
 			    <input type="hidden" name="path" value="{{ $path }}">
+			    <input type="hidden" name="project_id" value="{{ Request::query('project') }}">
 			    <input type="hidden" name="packet_id" value="{{ $packet->id }}">
 			    <input type="hidden" name="test_id" value="{{ $test->id }}">
 		        <input type="hidden" id="D" name="Dm">
@@ -26,7 +28,6 @@
             	<input type="hidden" id="L" name="Sl">
             	<input type="hidden" id="E" name="Cl">
             	<input type="hidden" id="H" name="Bl">
-        		@csrf
         		<div class="row">
         			@php
         				$totalsoal = 0;
@@ -107,14 +108,14 @@
     						Pilih satu jawaban yang
     						<strong>paling mendekati diri kamu</strong>
     						(
-    							<i style="color:#56DB28" class="fa fa-thumbs-up"></i>
+    							<i style="color:#56DB28" class="bi-hand-thumbs-up-fill"></i>
     						)
     					</li>
     					<li>
     						Pilih satu jawaban yang
     						<strong>paling tidak mendekati diri kamu</strong>
     						( 
-    							<i style="color:#E3451E" class="fa fa-thumbs-down"></i>
+    							<i style="color:#E3451E" class="bi-hand-thumbs-down-fill"></i>
     						)
     					</li>
     				</ul><br>

@@ -27,7 +27,7 @@
     <div class="row justify-content-center">
         @foreach($project->tests as $test)
         <div class="col-auto">
-            <a href="{{ route('member.test.index', ['path' => $test->code]) }}" class="btn btn-md btn-block btn-outline-dark border-0 fw-bold py-3 my-3 btn-project" data-id="{{ $test->id }}">
+            <a href="{{ route('member.test.index', ['path' => $test->code, 'project' => $project->id]) }}" class="btn btn-md btn-block btn-outline-dark border-0 fw-bold py-3 my-3 btn-project">
                 <i class="h1 bi-clipboard"></i>
                 <p class="m-0 mb-2">{{ $test->name }}</p>
             </a>

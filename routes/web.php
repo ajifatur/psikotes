@@ -57,7 +57,7 @@ Route::group(['middleware' => ['faturhelper.nonadmin']], function() {
     Route::get('/member/project', function() {
         return redirect()->route('member.dashboard')->with(['message' => 'Anda wajib memasukkan token sebelum menuju ke halaman Tes.']);
     })->name('member.project');
-    Route::post('/member/project', 'ProjectController@check')->name('member.project');
+    Route::post('/member/project', 'ProjectController@check');
 
     // Test
     Route::get('/member/test/{path}', 'TestController@index')->name('member.test.index');

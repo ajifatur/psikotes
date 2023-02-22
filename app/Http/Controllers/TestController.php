@@ -37,9 +37,9 @@ class TestController extends Controller
             return \App\Http\Controllers\Test\MSDTController::index($request, $path, $test);
         // Test IST
         elseif($path == 'ist')
-            return \App\Http\Controllers\Test\ISTController::try($request, $path, $test);
+            return \App\Http\Controllers\Test\ISTController::index($request, $path, $test);
         // Test RMIB
-        elseif($path == 'rmib' || $path == 'rmib-2')
+        elseif($path == 'rmib')
             return \App\Http\Controllers\Test\RMIBController::index($request, $path, $test);
         else
             abort(404);
