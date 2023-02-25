@@ -34,6 +34,14 @@ class Project extends Model
     }
 
     /**
+     * Result.
+     */
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
+
+    /**
      * The tests that belong to the project.
      */
     public function tests()
