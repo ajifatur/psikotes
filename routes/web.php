@@ -28,6 +28,9 @@ Route::get('/', function () {
     }
 });
 
+// Register
+Route::get('/register', 'RegisterController@showRegistrationForm')->name('auth.register');
+
 \Ajifatur\Helpers\RouteExt::auth();
 \Ajifatur\Helpers\RouteExt::admin();
 

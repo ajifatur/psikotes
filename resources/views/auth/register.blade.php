@@ -20,6 +20,10 @@
         @media(min-width: 992px){
             #left {border-radius:0 2rem 2rem 0;}
         }
+        .scroll-box::-webkit-scrollbar{width: 0.5em;}
+        .scroll-box::-webkit-scrollbar-track{background-color:#00000010; border-radius:1rem}
+        .scroll-box::-webkit-scrollbar-thumb{background-color: #00000030; border-radius:1rem;}
+        .scroll-box::-webkit-scrollbar-thumb:hover{background-color: #00000040;}
     </style>
 </head>
 <body>
@@ -30,30 +34,55 @@
                 <form class="login-box w-75" method="post" action="{{ route('auth.login') }}">
                     @csrf
                     <h1 class="h3 mb-3">Selamat Datang di {{ config('app.name') }}</h1>
-                    <p>🔔 Kamu dapat mengetahui kepribadianmu dengan cara mengikuti tes yang diadakan psikolog kesayanganmu!</p>
+                    <p>🔔 Silahkan isi data dirimu buat bikin akun baru!</p>
                     <hr>
-                    @if($errors->has('message'))
-                    <div class="alert alert-danger" role="alert">{{ $errors->first('message') }}</div>
-                    @endif
-                    <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="text" name="username" class="form-control {{ $errors->has('username') ? 'border-danger' : '' }} rounded-3" value="{{ old('username') }}" placeholder="{{ config('faturhelper.auth.allow_login_by_email') === true ? 'Email atau Username' : 'Masukan Username' }}" autofocus>
-                        @if($errors->has('username'))
-                        <div class="small text-danger text-start">{{ $errors->first('username') }}</div>
+                    <div class="my-4 px-2 scroll-box" style="height:calc(100vh - 25em); overflow-y:auto">
+                        @if($errors->has('message'))
+                        <div class="alert alert-danger" role="alert">{{ $errors->first('message') }}</div>
                         @endif
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <div class="input-group">
-                            <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'border-danger' : '' }} rounded-3" placeholder="Masukan Password">
-                            <button type="button" class="btn {{ $errors->has('password') ? 'btn-outline-danger' : 'btn-outline-secondary' }} btn-toggle-password rounded-3 ms-1"><i class="bi-eye"></i></button>
+                        <div class="mb-3">
+                            <label class="form-label">Nama</label>
+                            <input type="text" name="nama" class="form-control {{ $errors->has('nama') ? 'border-danger' : '' }} rounded-3" require>
                         </div>
-                        @if($errors->has('password'))
-                        <div class="small text-danger text-start">{{ $errors->first('password') }}</div>
-                        @endif
+                        <label class="form-label">Jenis Kelamin</label>
+                        <select class="form-select mb-3 rounded-3">
+                            <option selected disabled>Pilih Jenis Kelamin</option>
+                            <option value="1">Laki-Laki</option>
+                            <option value="2">Perempuan</option>
+                        </select>
+                        <div class="mb-3">
+                            <label class="form-label">Tanggal Lahir</label>
+                            <input type="text" name="nama" class="form-control {{ $errors->has('nama') ? 'border-danger' : '' }} rounded-3" require>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Pekerjaan</label>
+                            <input type="text" name="nama" class="form-control {{ $errors->has('nama') ? 'border-danger' : '' }} rounded-3" require>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Jabatan</label>
+                            <input type="text" name="nama" class="form-control {{ $errors->has('nama') ? 'border-danger' : '' }} rounded-3" require>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Institusi</label>
+                            <input type="text" name="nama" class="form-control {{ $errors->has('nama') ? 'border-danger' : '' }} rounded-3" require>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="text" name="Email" class="form-control {{ $errors->has('nama') ? 'border-danger' : '' }} rounded-3" require>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'border-danger' : '' }} rounded-3" placeholder="Masukan Password">
+                                <button type="button" class="btn {{ $errors->has('password') ? 'btn-outline-danger' : 'btn-outline-secondary' }} btn-toggle-password rounded-3 ms-1"><i class="bi-eye"></i></button>
+                            </div>
+                            @if($errors->has('password'))
+                            <div class="small text-danger text-start">{{ $errors->first('password') }}</div>
+                            @endif
+                        </div>
                     </div>
-                    <button class="w-100 btn btn-primary rounded-3 mb-5" type="submit">Log in</button>
-                    <div class="text-center">Belum punya akun? <a href="register">Daftar yuk!</a></div>
+                    <button class="w-100 btn btn-primary rounded-3 mb-5" type="submit">Buat Akun</button>
+                    <div class="text-center">Sudah punya akun? <a href="login">Masuk yuk!</a></div>
                     @if(config('faturhelper.auth.socialite') == true)
                     <div class="btn-group mt-3">
                         <a href="{{ route('auth.login.provider', ['provider' => 'google']) }}" class="btn btn-outline-primary">Google</a>
