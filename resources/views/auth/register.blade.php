@@ -24,6 +24,10 @@
         .scroll-box::-webkit-scrollbar-track{background-color:#00000010; border-radius:1rem}
         .scroll-box::-webkit-scrollbar-thumb{background-color: #00000030; border-radius:1rem;}
         .scroll-box::-webkit-scrollbar-thumb:hover{background-color: #00000040;}
+        span.select2-selection.select2-selection--single.select2-selection--clearable{border-radius:3rem!important; height:3.2em}
+        .select2-container--default .select2-selection--single .select2-selection__rendered{line-height: 37px!important;}
+        .select2-container--default .select2-selection--single .select2-selection__clear{line-height:32px!important}
+        .select2-container--default .select2-selection--single .select2-selection__arrow{top:6px!important}
     </style>
 </head>
 <body>
@@ -36,7 +40,7 @@
                     <h1 class="h3 mb-3">Selamat Datang di {{ config('app.name') }}</h1>
                     <p>🔔 Silahkan isi data dirimu buat bikin akun baru!</p>
                     <hr>
-                    <div class="my-4 px-2 scroll-box" style="height:calc(100vh - 25em); overflow-y:auto">
+                    <div class="my-4 px-2 scroll-box" style="height:calc(100vh - 25em); overflow-y:auto; overflow-x:hidden">
                         @if($errors->has('message'))
                         <div class="alert alert-danger" role="alert">{{ $errors->first('message') }}</div>
                         @endif
@@ -69,7 +73,7 @@
                             <label class="form-label">Nomor Telepon <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <select name="country_code" class="form-select {{ $errors->has('country_code') ? 'border-danger' : '' }} rounded-3" id="select2" style="width: 40%"></select>
-                                <input type="text" name="phone_number" class="form-control {{ $errors->has('phone_number') ? 'border-danger' : '' }} rounded-3" value="{{ old('phone_number') }}">
+                                <input type="number" name="phone_number" class="form-control {{ $errors->has('phone_number') ? 'border-danger' : '' }} rounded-3" value="{{ old('phone_number') }}">
                             </div>
                             @if($errors->has('phone_number'))
                             <div class="small text-danger">{{ $errors->first('phone_number') }}</div>
