@@ -28,6 +28,7 @@
         .select2-container--default .select2-selection--single .select2-selection__rendered{line-height: 37px!important;}
         .select2-container--default .select2-selection--single .select2-selection__clear{line-height:32px!important}
         .select2-container--default .select2-selection--single .select2-selection__arrow{top:6px!important}
+        span.select2.select2-container.select2-container--default{margin-right: 0.5rem;}
     </style>
 </head>
 <body>
@@ -72,7 +73,7 @@
                         <div class="row mb-3">
                             <label class="form-label">Nomor Telepon <span class="text-danger">*</span></label>
                             <div class="input-group">
-                                <select name="country_code" class="form-select {{ $errors->has('country_code') ? 'border-danger' : '' }} rounded-3" id="select2" style="width: 40%"></select>
+                                <select name="country_code" class="form-select {{ $errors->has('country_code') ? 'border-danger' : '' }} rounded-3 me-2" id="select2" style="width: 40%"></select>
                                 <input type="number" name="phone_number" class="form-control {{ $errors->has('phone_number') ? 'border-danger' : '' }} rounded-3" value="{{ old('phone_number') }}">
                             </div>
                             @if($errors->has('phone_number'))
