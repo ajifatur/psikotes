@@ -63,6 +63,7 @@
             <p class="m-0 fw-bold">Daftar Project</p>
         </div>
         <div class="content">
+            @if(count($projects) > 0)
             <div class="row justify-content-start">
                 @foreach($projects as $project)
                 <div class="col-md-6 d-flex align-items-stretch col-lg-4">
@@ -76,6 +77,11 @@
                 </div>
                 @endforeach
             </div>
+            @else
+            <div class="alert alert-danger fade show mt-3" role="alert">
+                <div class="alert-message"><i class="bi-exclamation-diamond"></i> Belum ada project yang ditampilkan.</div>
+            </div>
+            @endif
     </section>
 </div>
 <div class="modal fade" id="modal-input-token" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

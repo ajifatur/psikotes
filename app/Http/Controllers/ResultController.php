@@ -23,9 +23,9 @@ class ResultController extends Controller
 
         // Get results
         if(Auth::user()->role_id == role('super-admin'))
-            $results = Result::all();
+            $results = Result::has('user')->get();
         elseif(Auth::user()->role_id == role('hrd'))
-            $results = Result::all();
+            $results = Result::has('user')->get();
 
         // View
         return view('admin/result/index', [
@@ -46,9 +46,9 @@ class ResultController extends Controller
 
         // Get result
         if(Auth::user()->role_id == role('super-admin'))
-            $result = Result::findOrFail($id);
+            $result = Result::has('user')->findOrFail($id);
         elseif(Auth::user()->role_id == role('hrd'))
-            $result = Result::findOrFail($id);
+            $result = Result::has('user')->findOrFail($id);
 
         // Decode
         $result->result = json_decode($result->result, true);

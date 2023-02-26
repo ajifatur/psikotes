@@ -28,9 +28,6 @@ Route::get('/', function () {
     }
 });
 
-// Register
-Route::get('/register', 'RegisterController@showRegistrationForm')->name('auth.register');
-
 \Ajifatur\Helpers\RouteExt::auth();
 \Ajifatur\Helpers\RouteExt::admin();
 
@@ -40,6 +37,10 @@ Route::group(['middleware' => ['faturhelper.guest']], function() {
 		return view('auth/login');
 	})->name('auth.login');
     Route::post('/login', 'LoginController@authenticate');
+
+    // Register
+    Route::get('/register', 'RegisterController@showRegistrationForm')->name('auth.register');
+    Route::post('/register', 'RegisterController@store');
 });
 
 Route::group(['middleware' => ['faturhelper.admin']], function() {
@@ -56,6 +57,11 @@ Route::group(['middleware' => ['faturhelper.admin']], function() {
     Route::get('/admin/result/detail/{id}', 'ResultController@detail')->name('admin.result.detail');
     Route::post('/admin/result/delete', 'ResultController@delete')->name('admin.result.delete');
     Route::post('/admin/result/print', 'ResultController@print')->name('admin.result.print');
+
+    // Member
+    Route::get('/admin/member', 'MemberController@index')->name('admin.member.index');
+    Route::post('/admin/member/delete', 'MemberController@delete')->name('admin.member.delete');
+    Route::post('/admin/member/delete-bulk', 'MemberController@deleteBulk')->name('admin.member.delete-bulk');
 });
 
 Route::group(['middleware' => ['faturhelper.nonadmin']], function() {

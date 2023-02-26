@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://ajifatur.github.io/assets/spandiv.min.css">
 
-    <title>Log in | {{ config('app.name') }}</title>
+    <title>Registrasi | {{ config('app.name') }}</title>
     <style>
         .rounded-1 {border-radius: .5rem !important;}
         .rounded-2 {border-radius: 1rem !important;}
@@ -31,7 +31,7 @@
         <div class="row bg-primary">
             <div class="col-12 col-lg-5 vh-100 bg-white shadow-lg z-1 d-flex flex-wrap align-items-center align-content-around justify-content-center" id="left">
                 <div class="w-75"><a href="https://spandiv.xyz/"><img src="https://sgp1.digitaloceanspaces.com/spandiv/images/spandiv/2022/11/JajfjbGF-Spandiv-Logo.svg" width="100" alt="logo spandiv digital solutions"></a></div>
-                <form class="login-box w-75" method="post" action="{{ route('auth.login') }}">
+                <form class="login-box w-75" method="post" action="{{ route('auth.register') }}">
                     @csrf
                     <h1 class="h3 mb-3">Selamat Datang di {{ config('app.name') }}</h1>
                     <p>🔔 Silahkan isi data dirimu buat bikin akun baru!</p>
@@ -41,37 +41,72 @@
                         <div class="alert alert-danger" role="alert">{{ $errors->first('message') }}</div>
                         @endif
                         <div class="mb-3">
-                            <label class="form-label">Nama</label>
-                            <input type="text" name="nama" class="form-control {{ $errors->has('nama') ? 'border-danger' : '' }} rounded-3" require>
-                        </div>
-                        <label class="form-label">Jenis Kelamin</label>
-                        <select class="form-select mb-3 rounded-3">
-                            <option selected disabled>Pilih Jenis Kelamin</option>
-                            <option value="1">Laki-Laki</option>
-                            <option value="2">Perempuan</option>
-                        </select>
-                        <div class="mb-3">
-                            <label class="form-label">Tanggal Lahir</label>
-                            <input type="text" name="nama" class="form-control {{ $errors->has('nama') ? 'border-danger' : '' }} rounded-3" require>
+                            <label class="form-label">Nama <span class="text-danger">*</span></label>
+                            <input type="text" name="name" class="form-control {{ $errors->has('name') ? 'border-danger' : '' }} rounded-3" value="{{ old('name') }}" autofocus>
+                            @if($errors->has('name'))
+                            <div class="small text-danger text-start">{{ $errors->first('name') }}</div>
+                            @endif
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Pekerjaan</label>
-                            <input type="text" name="nama" class="form-control {{ $errors->has('nama') ? 'border-danger' : '' }} rounded-3" require>
+                            <label class="form-label">Jenis Kelamin <span class="text-danger">*</span></label>
+                            <select class="form-select {{ $errors->has('gender') ? 'border-danger' : '' }} rounded-3" name="gender">
+                                <option selected disabled>--Pilih--</option>
+                                <option value="L" {{ old('gender') == 'L' ? 'selected' : '' }}>Laki-Laki</option>
+                                <option value="P" {{ old('gender') == 'P' ? 'selected' : '' }}>Perempuan</option>
+                            </select>
+                            @if($errors->has('gender'))
+                            <div class="small text-danger text-start">{{ $errors->first('gender') }}</div>
+                            @endif
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Jabatan</label>
-                            <input type="text" name="nama" class="form-control {{ $errors->has('nama') ? 'border-danger' : '' }} rounded-3" require>
+                            <label class="form-label">Tanggal Lahir <span class="text-danger">*</span></label>
+                            <input type="text" name="birthdate" class="form-control {{ $errors->has('birthdate') ? 'border-danger' : '' }} rounded-3" value="{{ old('birthdate') }}" placeholder="dd/mm/yyyy" autocomplete="off">
+                            @if($errors->has('birthdate'))
+                            <div class="small text-danger text-start">{{ $errors->first('birthdate') }}</div>
+                            @endif
+                        </div>
+                        <div class="row mb-3">
+                            <label class="form-label">Nomor Telepon <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <select name="country_code" class="form-select {{ $errors->has('country_code') ? 'border-danger' : '' }} rounded-3" id="select2" style="width: 40%"></select>
+                                <input type="text" name="phone_number" class="form-control {{ $errors->has('phone_number') ? 'border-danger' : '' }} rounded-3" value="{{ old('phone_number') }}">
+                            </div>
+                            @if($errors->has('phone_number'))
+                            <div class="small text-danger">{{ $errors->first('phone_number') }}</div>
+                            @elseif($errors->has('country_code'))
+                            <div class="small text-danger">{{ $errors->first('country_code') }}</div>
+                            @endif
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Institusi</label>
-                            <input type="text" name="nama" class="form-control {{ $errors->has('nama') ? 'border-danger' : '' }} rounded-3" require>
+                            <label class="form-label">Pekerjaan <span class="text-danger">*</span></label>
+                            <input type="text" name="occupation" class="form-control {{ $errors->has('occupation') ? 'border-danger' : '' }} rounded-3" value="{{ old('occupation') }}">
+                            @if($errors->has('occupation'))
+                            <div class="small text-danger text-start">{{ $errors->first('occupation') }}</div>
+                            @endif
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="text" name="Email" class="form-control {{ $errors->has('nama') ? 'border-danger' : '' }} rounded-3" require>
+                            <label class="form-label">Jabatan <span class="text-danger">*</span></label>
+                            <input type="text" name="position" class="form-control {{ $errors->has('position') ? 'border-danger' : '' }} rounded-3" value="{{ old('position') }}">
+                            @if($errors->has('position'))
+                            <div class="small text-danger text-start">{{ $errors->first('position') }}</div>
+                            @endif
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Password</label>
+                            <label class="form-label">Institusi <span class="text-danger">*</span></label>
+                            <input type="text" name="institution" class="form-control {{ $errors->has('institution') ? 'border-danger' : '' }} rounded-3" value="{{ old('institution') }}">
+                            @if($errors->has('institution'))
+                            <div class="small text-danger text-start">{{ $errors->first('institution') }}</div>
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'border-danger' : '' }} rounded-3" value="{{ old('email') }}">
+                            @if($errors->has('email'))
+                            <div class="small text-danger text-start">{{ $errors->first('email') }}</div>
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'border-danger' : '' }} rounded-3" placeholder="Masukan Password">
                                 <button type="button" class="btn {{ $errors->has('password') ? 'btn-outline-danger' : 'btn-outline-secondary' }} btn-toggle-password rounded-3 ms-1"><i class="bi-eye"></i></button>
@@ -127,5 +162,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://ajifatur.github.io/assets/spandiv.min.js"></script>
+    <script>
+        // Get Country Codes
+        Spandiv.Select2ServerSide("#select2", {
+            url: "{{ route('api.country-code') }}",
+            value: "{{ old('country_code') }}",
+            valueProp: "code",
+            nameProp: "name",
+            bracketProp: "dial_code"
+        });
+
+        // DatePicker
+        Spandiv.DatePicker("input[name=birthdate]");
+    </script>
 </body>
 </html>
