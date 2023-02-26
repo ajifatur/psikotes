@@ -81,8 +81,8 @@
 <script>
     // Daterangepicker
     Spandiv.DateRangePicker("input[name=date]", {
-        startDate: "{{ date('d/m/Y H:i', strtotime($project->date_from)) }}",
-        endDate: "{{ date('d/m/Y H:i', strtotime($project->date_to)) }}"
+        start: "{{ date('d/m/Y H:i', strtotime($project->date_from)) }}",
+        end: "{{ date('d/m/Y H:i', strtotime($project->date_to)) }}"
     });
 </script>
 
