@@ -10,7 +10,7 @@ return [
     */
 
     'auth' => [
-        'allow_login_by_email' => false,
+        'allow_login_by_email' => true,
         'non_admin_can_login' => true,
         'socialite' => false
     ],

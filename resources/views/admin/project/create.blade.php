@@ -13,6 +13,22 @@
             <div class="card-body">
                 <form method="post" action="{{ route('admin.project.store') }}" enctype="multipart/form-data">
                     @csrf
+                    @if(Auth::user()->role_id == role('super-admin'))
+                    <div class="row mb-3">
+                        <label class="col-lg-2 col-md-3 col-form-label">HRD <span class="text-danger">*</span></label>
+                        <div class="col-lg-10 col-md-9">
+                            <select name="hrd" class="form-select form-select-sm {{ $errors->has('hrd') ? 'border-danger' : '' }}">
+                                <option value="" disabled selected>--Pilih--</option>
+                                @foreach($hrds as $hrd)
+                                <option value="{{ $hrd->id }}" {{ old('hrd') == $hrd->id ? 'selected' : '' }}>{{ $hrd->name }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('hrd'))
+                            <div class="small text-danger">{{ $errors->first('hrd') }}</div>
+                            @endif
+                        </div>
+                    </div>
+                    @endif
                     <div class="row mb-3">
                         <label class="col-lg-2 col-md-3 col-form-label">Nama <span class="text-danger">*</span></label>
                         <div class="col-lg-10 col-md-9">

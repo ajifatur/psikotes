@@ -113,7 +113,7 @@
                         <div class="mb-3">
                             <label class="form-label">Password <span class="text-danger">*</span></label>
                             <div class="input-group">
-                                <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'border-danger' : '' }} rounded-3" placeholder="Masukan Password">
+                                <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'border-danger' : '' }} rounded-3">
                                 <button type="button" class="btn {{ $errors->has('password') ? 'btn-outline-danger' : 'btn-outline-secondary' }} btn-toggle-password rounded-3 ms-1"><i class="bi-eye"></i></button>
                             </div>
                             @if($errors->has('password'))

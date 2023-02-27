@@ -36,8 +36,8 @@
                     <div class="alert alert-danger" role="alert">{{ $errors->first('message') }}</div>
                     @endif
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="text" name="username" class="form-control {{ $errors->has('username') ? 'border-danger' : '' }} rounded-3" value="{{ old('username') }}" placeholder="{{ config('faturhelper.auth.allow_login_by_email') === true ? 'Email atau Username' : 'Masukan Username' }}" autofocus>
+                        <label class="form-label">Email / Username</label>
+                        <input type="text" name="username" class="form-control {{ $errors->has('username') ? 'border-danger' : '' }} rounded-3" value="{{ old('username') }}" placeholder="{{ config('faturhelper.auth.allow_login_by_email') === true ? 'Masukkan Email atau Username' : 'Masukkan Username' }}" autofocus>
                         @if($errors->has('username'))
                         <div class="small text-danger text-start">{{ $errors->first('username') }}</div>
                         @endif
@@ -45,7 +45,7 @@
                     <div class="mb-3">
                         <label class="form-label">Password</label>
                         <div class="input-group">
-                            <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'border-danger' : '' }} rounded-3" placeholder="Masukan Password">
+                            <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'border-danger' : '' }} rounded-3" placeholder="Masukkan Password">
                             <button type="button" class="btn {{ $errors->has('password') ? 'btn-outline-danger' : 'btn-outline-secondary' }} btn-toggle-password rounded-3 ms-1"><i class="bi-eye"></i></button>
                         </div>
                         @if($errors->has('password'))

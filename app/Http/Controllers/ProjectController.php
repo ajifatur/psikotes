@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Ajifatur\Helpers\DateTimeExt;
 use App\Models\Project;
 use App\Models\Test;
+use App\Models\User;
 
 class ProjectController extends Controller
 {
@@ -47,9 +48,13 @@ class ProjectController extends Controller
         // Get tests
         $tests = Test::orderBy('num_order','asc')->get();
 
+        // Get HRDs
+        $hrds = User::where('role_id','=',role('hrd'))->orderBy('name','asc')->get();
+
         // View
         return view('admin/project/create', [
-            'tests' => $tests
+            'tests' => $tests,
+            'hrds' => $hrds
         ]);
     }
 
@@ -63,6 +68,7 @@ class ProjectController extends Controller
     {
         // Validation
         $validator = Validator::make($request->all(), [
+            'hrd' => Auth::user()->role_id == role('super-admin') ? 'required' : '',
             'name' => 'required|max:255',
             'token' => 'required|max:255',
             'date' => 'required',
@@ -77,7 +83,7 @@ class ProjectController extends Controller
         else {
             // Save the project
             $project = new Project;
-            $project->user_id = Auth::user()->id;
+            $project->user_id = Auth::user()->role_id == role('hrd') ? Auth::user()->id : $request->hrd;
             $project->name = $request->name;
             $project->token = $request->token;
             $project->date_from = DateTimeExt::split($request->date)[0];
@@ -112,10 +118,14 @@ class ProjectController extends Controller
         // Get tests
         $tests = Test::orderBy('num_order','asc')->get();
 
+        // Get HRDs
+        $hrds = User::where('role_id','=',role('hrd'))->orderBy('name','asc')->get();
+
         // View
         return view('admin/project/edit', [
             'project' => $project,
-            'tests' => $tests
+            'tests' => $tests,
+            'hrds' => $hrds
         ]);
     }
 
@@ -129,6 +139,7 @@ class ProjectController extends Controller
     {
         // Validation
         $validator = Validator::make($request->all(), [
+            'hrd' => Auth::user()->role_id == role('super-admin') ? 'required' : '',
             'name' => 'required|max:255',
             'token' => 'required|max:255',
             'date' => 'required',
@@ -142,6 +153,7 @@ class ProjectController extends Controller
         else {
             // Update the project
             $project = Project::find($request->id);
+            $project->user_id = Auth::user()->role_id == role('hrd') ? Auth::user()->id : $request->hrd;
             $project->name = $request->name;
             $project->token = $request->token;
             $project->date_from = DateTimeExt::split($request->date)[0];
