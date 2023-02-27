@@ -31,8 +31,8 @@
         }
     </script>
     <div id="header">
-        <img src="https://tes.spandiv.xyz/assets/images/logo/connectedness-1.png" height="25">
-        <div class="page-number" data-nama="{{ $name }}" data-site="connectedness.id"></div>
+        <img src="{{ asset('assets/images/logo/spandiv-logo.png') }}" height="25">
+        <div class="page-number" data-nama="{{ $name }}" data-site="www.spandiv.xyz"></div>
     </div>
     <h5 class="text-center font-weight-bold mt-3 mb-4">Hasil Tes {{ $test }}</h5>
     <table width="100%" border="0" style="margin-top: 20px;">

@@ -22,7 +22,7 @@
     </div>
 
     <section class="container"> 
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-indicators mb-0">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active bg-dark rounded-circle" style="width:8px; height:8px" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" class=" bg-dark rounded-circle" style="width:8px; height:8px" aria-label="Slide 2"></button>
@@ -49,7 +49,8 @@
             </div>
           </div>
           <button class="carousel-control-next d-none d-md-flex" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <img width="40" src="https://tes.spandiv.xyz/assets/images/icon/next.png">
+            <img width="40" src="https://tes.spandiv.xyz/assets/images/icon/next.png"
+                 style="filter: hue-rotate(110deg);">
           </button>
         </div>  
         @if(Session::get('message'))
@@ -68,10 +69,10 @@
                 @foreach($projects as $project)
                 <div class="col-md-6 d-flex align-items-stretch col-lg-4">
                     <a href="#" class="btn btn-md btn-block btn-outline-dark rounded-2 d-flex border py-3 my-2 w-100 btn-project" data-id="{{ $project->id }}">
-                        <i class="h1 bi-clipboard me-3"></i>
+                        <i class="h1 bi-clipboard-fill me-3 text-primary"></i>
                         <div class="text-start">
                             <p class="m-0 fw-bold">{{ $project->name }}</p>
-                            <p class="m-0 small fw-normal"><i class="bi-calendar2"></i> Sampai {{ date('d/m/Y',strtotime($project->date_to)) }}</p>
+                            <p class="m-0 small fw-normal"><i class="bi-calendar2 text-primary"></i> Sampai {{ date('d/m/Y',strtotime($project->date_to)) }}</p>
                         </div>
                     </a>
                 </div>

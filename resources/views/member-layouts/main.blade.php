@@ -3,13 +3,13 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://ajifatur.github.io/assets/spandiv.min.css">
-    <link rel="stylesheet" type="text/css" href="https://tes.spandiv.xyz/assets/css/style.css">
-    <link rel="icon" type="image/x-icon" href="https://tes.spandiv.xyz/assets/images/icon/icon connectedness.png">
+    <link rel="stylesheet" type="text/css" href="{{ asset ('assets/css/style.css')}}">
+    <link rel="icon" type="image/x-icon" href="{{ asset ('assets/images/icon/icon-spandiv.png')}}">
     @yield('css')
-    <title>Psikotes Spandiv x Connectedness</title>	
+    <title>{{ config('app.name') }}</title>	
 </head>
 <body class="bg-white">
     <nav class="navbar navbar-expand navbar-dark bg-theme-1 fixed-top shadow-sm">
@@ -20,7 +20,7 @@
             </li>
         </ul>
         <a class="navbar-brand mx-auto" href="{{ route('member.dashboard') }}">
-            <img src="https://tes.spandiv.xyz/assets/images/logo/connectedness-1.png" width="120" alt="img" style="filter: brightness(10);">
+            <img src="{{ asset('assets/images/logo/spandiv-logo-white.svg') }}" width="120" alt="img">
         </a>
         <ul class="nav navbar-nav">
             <li class="nav-item">
@@ -47,7 +47,7 @@ function myFunction() {
 myFunction();
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script src="https://ajifatur.github.io/assets/spandiv.min.js"></script>
 <script type="text/javascript">
 	function j(e){
