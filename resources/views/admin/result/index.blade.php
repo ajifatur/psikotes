@@ -10,6 +10,17 @@
 <div class="row">
 	<div class="col-12">
 		<div class="card">
+            <div class="card-header d-sm-flex justify-content-end align-items-center">
+                <div class="mb-sm-0 mb-2">
+                    <select name="project" class="form-select form-select-sm">
+                        <option value="0">Semua Project</option>
+                        @foreach($projects as $project)
+                        <option value="{{ $project->id }}" {{ Request::query('project') == $project->id ? 'selected' : '' }}>{{ $project->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <hr class="my-0">
             <div class="card-body">
                 @if(Session::get('message'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -26,7 +37,9 @@
                                 <th width="100">Tes</th>
                                 <th width="80">Waktu Tes</th>
                                 <th width="150">Project</th>
+                                @if(Auth::user()->role_id == role('super-admin'))
                                 <th width="150">HRD</th>
+                                @endif
                                 <th width="60">Opsi</th>
                             </tr>
                         </thead>
@@ -43,7 +56,9 @@
                                     <small class="text-muted">{{ date('H:i', strtotime($result->created_at)) }} WIB</small>
                                 </td>
                                 <td>{{ $result->project->name }}</td>
+                                @if(Auth::user()->role_id == role('super-admin'))
                                 <td>{{ $result->project->user->name }}</td>
+                                @endif
                                 <td align="center">
                                     <div class="btn-group">
                                         <a href="{{ route('admin.result.detail', ['id' => $result->id]) }}" class="btn btn-sm btn-info" data-bs-toggle="tooltip" title="Lihat Detail"><i class="bi-eye"></i></a>
@@ -75,6 +90,13 @@
 
     // Button Delete
     Spandiv.ButtonDelete(".btn-delete", ".form-delete");
+
+    // Change the Project
+    $(document).on("change", ".card-header select[name=project]", function() {
+		var project = $(this).val();
+		if(project === "0") window.location.href = Spandiv.URL("{{ route('admin.result.index') }}");
+		else window.location.href = Spandiv.URL("{{ route('admin.result.index') }}", {project: project});
+    });
 </script>
 
 @endsection

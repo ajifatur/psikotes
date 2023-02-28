@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Ajifatur\Helpers\DateTimeExt;
 use App\Models\Result;
+use App\Models\Project;
 
 class ResultController extends Controller
 {
@@ -21,15 +23,43 @@ class ResultController extends Controller
         // Check the access
         // has_access(method(__METHOD__), Auth::user()->role_id);
 
-        // Get results
-        if(Auth::user()->role_id == role('super-admin'))
-            $results = Result::has('user')->get();
-        elseif(Auth::user()->role_id == role('hrd'))
-            $results = Result::has('user')->get();
+        // Get the project
+        $project = Project::find($request->query('project'));
+
+        if(Auth::user()->role_id == role('super-admin')) {
+            // Get results
+            if($project)
+                $results = Result::has('user')->where('project_id','=',$project->id)->get();
+            else
+                $results = Result::has('user')->get();
+
+            // Get projects
+            $projects = Project::latest()->get();
+        }
+        elseif(Auth::user()->role_id == role('hrd')) {
+            // Get user
+            $user = Auth::user();
+
+            // Get results
+            if($project) {
+                $results = Result::has('user')->whereHas('project', function (Builder $query) use ($project, $user) {
+                    return $query->where('id','=',$project->id)->where('user_id','=',$user->id);
+                })->get();
+            }
+            else {
+                $results = Result::has('user')->whereHas('project', function (Builder $query) use ($user) {
+                    return $query->where('user_id','=',$user->id);
+                })->get();
+            }
+
+            // Get projects
+            $projects = Project::where('user_id','=',Auth::user()->id)->latest()->get();
+        }
 
         // View
         return view('admin/result/index', [
-            'results' => $results
+            'results' => $results,
+            'projects' => $projects
         ]);
     }
 

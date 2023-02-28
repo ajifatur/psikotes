@@ -29,7 +29,9 @@
                                 <th width="100">Tes</th>
                                 <th width="80">Mulai Tanggal</th>
                                 <th width="80">Sampai Tanggal</th>
+                                @if(Auth::user()->role_id == role('super-admin'))
                                 <th width="120">HRD</th>
+                                @endif
                                 <th width="60">Opsi</th>
                             </tr>
                         </thead>
@@ -61,7 +63,9 @@
                                     <br>
                                     <small class="text-muted">{{ date('H:i', strtotime($project->date_to)) }} WIB</small>
                                 </td>
+                                @if(Auth::user()->role_id == role('super-admin'))
                                 <td>{{ $project->user->name }}</td>
+                                @endif
                                 <td align="center">
                                     <div class="btn-group">
                                         <a href="{{ route('admin.project.edit', ['id' => $project->id]) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Edit"><i class="bi-pencil"></i></a>
