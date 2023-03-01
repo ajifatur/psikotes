@@ -21,21 +21,29 @@
     </div>
 
     <section class="container">
+        @if(Session::get('message'))
+        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+            <div class="alert-message">{{ Session::get('message') }}</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <div class="w-100 my-3 rounded-1" style="height:3px; background-color:transparent"></div>
         <div class="heading">
-            <p class="m-0 fw-bold">Daftar Tes</p>
+            <p class="m-0 fw-bold">Daftar Tes yang Belum Dikerjakan</p>
         </div>
         <div class="content">
             <div class="row justify-content-start">
                 @foreach($project->tests()->orderBy('num_order','asc')->get() as $test)
-                <div class="col-md-6 d-flex align-items-stretch col-lg-3">
-                    <a href="{{ route('member.test.index', ['path' => $test->code, 'project' => $project->id]) }}" class="btn btn-md btn-block btn-outline-dark rounded-2 d-flex border py-3 my-2 w-100">
-                        <img width="60" class="me-3" src="{{ asset('assets/images/icon/'.$test->image.'.svg') }}">
-                        <div class="text-start">
-                            <p class="m-0 fw-bold">{{ $test->name }}</p>
-                        </div>
-                    </a>
-                </div>
+                    @if(!in_array($test->id, $results))
+                    <div class="col-md-6 d-flex align-items-stretch col-lg-3">
+                        <a href="{{ route('member.test.index', ['path' => $test->code, 'project' => $project->id]) }}" class="btn btn-md btn-block btn-outline-dark rounded-2 d-flex border py-3 my-2 w-100">
+                            <img width="60" class="me-3" src="{{ asset('assets/images/icon/'.$test->image.'.svg') }}">
+                            <div class="text-start">
+                                <p class="m-0 fw-bold">{{ $test->name }}</p>
+                            </div>
+                        </a>
+                    </div>
+                    @endif
                 @endforeach
             </div>
     </section>

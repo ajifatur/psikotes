@@ -44,7 +44,7 @@
                                             <td>{{ $questions_array['L'][$key] }}</td>
                                             <td>
                                                 <select name="score[{{ $q->number }}][]" class="form-select form-select-sm select-score" data-id="{{ $q->number }}" data-key="{{ $key }}">
-                                                    <option value="" disabled selected>--Pilih--</option>
+                                                    <option value="" selected>--Pilih--</option>
                                                     @for($i=1; $i<=count($questions_array['L']); $i++)
                                                     <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
@@ -133,19 +133,34 @@
         $(".select-score[data-id="+ id +"]").each(function(index, elem) {
             arrayScore.push($(elem).val());
         });
-        // Count occurences
-        if(countOccurrences(value, arrayScore) > 1) {
-            // Change other scores to be null
-            $(".select-score[data-id="+ id +"]").each(function(index, elem) {
-                if(value === $(elem).val() && index !== key)
-                    $(elem).val(null);
-            });
-        }
+        // Disable selected
+        disableSelected(id, key, arrayScore);
         // Count answered question
         countAnswered();
         // Enable submit button
         countAnswered() >= totalQuestion() ? $("#btn-submit").removeAttr("disabled") : $("#btn-submit").attr("disabled", "disabled");
     });
+    // Disable selected
+    function disableSelected(id, key, array) {
+        // Reset disabled attribute
+        $(".select-score[data-id=" + id + "] option").each(function(index, elem) {
+            $(elem).removeAttr("disabled");
+        });
+        // Add disabled attribute
+        $(".select-score[data-id=" + id + "]").each(function(index, elem) {
+            var keyTemp = $(elem).data("key");
+            $(elem).find("option").each(function(index2, elem2) {
+                if(key != keyTemp && array.indexOf($(elem2).val()) >= 0 && $(elem2).val() != "")
+                    $(elem2).attr("disabled","disabled");
+            });
+        });
+        for(var i=0; i<array.length; i++) {
+            $(".select-score[data-id=" + id + "][data-key=" + i + "] option").each(function(index, elem) {
+                if($(elem).attr("value") == array[i])
+                    $(elem).removeAttr("disabled");
+            });
+        }
+    }
     // Count occurences
     function countOccurrences(val, arr) {
         var occurences = 0;
@@ -161,7 +176,7 @@
 			var id = $(elem).data("id");
             var selected = 0;
             $(".select-score[data-id="+ id +"]").each(function(index, elem) {
-                if($(elem).val() !== null) selected++;
+                if($(elem).val() !== "") selected++;
             });
             if(selected === $(".select-score[data-id="+ id +"]").length) total++;
 		});
@@ -183,5 +198,6 @@
 	.table {margin-bottom: 0;}
     .table thead tr th {text-align: center;}
     .soal {font-size: 85%;}
+    .select-score option:disabled {background-color: #e5e5e5;}
 </style>
 @endsection

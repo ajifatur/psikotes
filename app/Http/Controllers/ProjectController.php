@@ -9,6 +9,7 @@ use Ajifatur\Helpers\DateTimeExt;
 use App\Models\Project;
 use App\Models\Test;
 use App\Models\User;
+use App\Models\Result;
 
 class ProjectController extends Controller
 {
@@ -200,18 +201,47 @@ class ProjectController extends Controller
     {
         // Check the access
         // has_access(method(__METHOD__), Auth::user()->role_id);
-        
-        // Check the project
-        $project = Project::where('token','=',$request->token)->find($request->id);
 
-        if($project) {
-            // View
-            return view('member/project/index', [
-                'project' => $project
-            ]);
+        if($request->method() == 'GET') {
+            // Check the project
+            if(in_array($request->query('id'), session()->get('projects'))) {
+                // Get the project
+                $project = Project::findOrFail($request->query('id'));
+
+                // Results has been assigned
+                $results = Result::where('user_id','=',Auth::user()->id)->where('project_id','=',$project->id)->pluck('test_id')->toArray();
+
+                // View
+                return view('member/project/index', [
+                    'project' => $project,
+                    'results' => $results,
+                ]);
+            }
+            else {
+                return redirect()->route('member.dashboard')->with(['message' => 'Anda wajib memasukkan token sebelum menuju ke halaman Tes.']);
+            }
         }
-        else {
-            return redirect()->route('member.dashboard')->with(['message' => 'Token yang Anda masukkan salah!']);
+        elseif($request->method() == 'POST') {
+            // Check the project
+            $project = Project::where('token','=',$request->token)->find($request->id);
+
+            // Results has been assigned
+            $results = Result::where('user_id','=',Auth::user()->id)->where('project_id','=',$project->id)->pluck('test_id')->toArray();
+
+            if($project) {
+                // Push to project session
+                if(!in_array($project->id, session()->get('projects')))
+                    session()->push('projects', $project->id);
+                
+                // View
+                return view('member/project/index', [
+                    'project' => $project,
+                    'results' => $results,
+                ]);
+            }
+            else {
+                return redirect()->route('member.dashboard')->with(['message' => 'Token yang Anda masukkan salah!']);
+            }
         }
     }
 }

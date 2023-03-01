@@ -68,7 +68,7 @@
             <div class="row justify-content-start">
                 @foreach($projects as $project)
                 <div class="col-md-6 d-flex align-items-stretch col-lg-4">
-                    <a href="#" class="btn btn-md btn-block btn-outline-dark rounded-2 d-flex border py-3 my-2 w-100 btn-project" data-id="{{ $project->id }}">
+                    <a href="{{ !in_array($project->id, session()->get('projects')) ? '#' : route('member.project', ['id' => $project->id]) }}" class="btn btn-md btn-block btn-outline-dark rounded-2 d-flex border py-3 my-2 w-100 {{ !in_array($project->id, session()->get('projects')) ? 'btn-project' : '' }}" data-id="{{ $project->id }}">
                         <i class="h1 bi-clipboard-fill me-3 text-primary"></i>
                         <div class="text-start">
                             <p class="m-0 fw-bold">{{ $project->name }}</p>
@@ -96,7 +96,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" name="token" class="form-control form-control-sm {{ $errors->has('token') ? 'border-danger' : '' }}" placeholder="Masukkan Token" required>
+                    <input type="text" name="token" class="form-control form-control-sm {{ $errors->has('token') ? 'border-danger' : '' }}" placeholder="Masukkan Token" autocomplete="off" required>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-sm btn-primary">Submit</button>

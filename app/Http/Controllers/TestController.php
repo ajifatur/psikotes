@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
 use App\Models\Test;
+use App\Models\Result;
 
 class TestController extends Controller
 {    
@@ -19,6 +20,12 @@ class TestController extends Controller
     {
         // Get the test
         $test = Test::where('code','=',$path)->firstOrFail();
+
+        // Results has been assigned
+        $results = Result::where('user_id','=',Auth::user()->id)->where('project_id','=',$request->query('project'))->pluck('test_id')->toArray();
+
+        if(in_array($test->id, $results))
+            return redirect()->route('member.project', ['id' => $request->query('project')])->with(['message' => 'Tes ini sudah pernah dikerjakan!']);
             
         // Test DISC 24
         if($path == 'disc-24')

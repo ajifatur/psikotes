@@ -97,6 +97,9 @@ class LoginController extends \App\Http\Controllers\Controller
                     $visitor->save();
                 }
 
+                // Set projects session
+                session()->put('projects', []);
+
                 // Redirect
                 if($user && $user->role->is_admin == 1)
                     return redirect()->route('admin.dashboard');

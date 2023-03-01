@@ -292,7 +292,7 @@ class ModalAuth extends React.Component {
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button type="submit" class="btn btn-sm btn-info"><i class="fa fa-save me-1"></i>Submit</button>
+								<button type="submit" class="btn btn-sm btn-info"><i class="bi-save me-1"></i>Submit</button>
 							</div>
 						</form>
 					</div>
@@ -653,7 +653,7 @@ class ModalTutorial extends React.Component {
 							{HTMLEntityDecode(this.props.item.tutorial)}
 							<div class="mt-2">
 								<button type="button" class={`btn btn-sm btn-info ${this.props.item.type === 'choice-memo' && isMemorizing !== 1 ? '' : 'd-none'}`} onClick={this.handleMemorize}>
-									<i class="fa fa-clipboard me-1"></i>Membaca Hafalan
+									<i class="bi-clipboard me-1"></i>Membaca Hafalan
 								</button>
 							</div>
 							<div class={`to-memorize ${isMemorizing === 0 ? '' : 'd-none'}`}>
@@ -664,13 +664,13 @@ class ModalTutorial extends React.Component {
 						</div>
 						<div class={`modal-footer ${this.props.examples.length === 0 ? '' : 'justify-content-between'}`}>
 							<button type="button" class={`btn btn-sm btn-warning ${this.props.examples.length === 0 || isTrying === 1 || (this.props.item.type === 'choice-memo' && isMemorizing === null) ? 'd-none' : ''}`} onClick={this.handleTry}>
-								<i class="fa fa-pencil me-1"></i>Latihan Soal
+								<i class="bi-pencil me-1"></i>Latihan Soal
 							</button>
 							<button type="button" class={`btn btn-sm btn-info ${isTrying === 1 ? '' : 'd-none'}`} onClick={this.handleCheck}>
-								<i class="fa fa-save me-1"></i>Cek Jawaban
+								<i class="bi-save me-1"></i>Cek Jawaban
 							</button>
 							<button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal" onClick={this.handleHide}>
-								<i class="fa fa-thumbs-o-up me-1"></i>Mengerti
+								<i class="bi-hand-thumbs-up me-1"></i>Mengerti
 							</button>
 						</div>
 					</div>
@@ -942,7 +942,7 @@ class Card extends React.Component {
 		return (
 			<div class="card card-question">
 				<div class="card-header d-flex justify-content-between">
-					<span class="fw-bold"><i class="fa fa-edit"></i> Soal {item.number}</span>
+					<span class="fw-bold"><i class="bi-edit"></i> Soal {item.number}</span>
 					<span>
 						<Timer
 							parentCallback={this.handleTimerCallback}
@@ -1053,17 +1053,17 @@ class Timer extends React.Component {
 		const {time} = this.state;
 
 		if(time === null) {
-			return <span><i class="fa fa-clock-o me-1"></i> Memulai...</span>
+			return <span><i class="bi-clock-o me-1"></i> Memulai...</span>
 		}
 		else if(time > 0) {
 			return (
 				<span class={time <= 10 ? 'text-danger' : ''}>
-					<i class="fa fa-clock-o me-1"></i> {this.timeToString()}
+					<i class="bi-clock-o me-1"></i> {this.timeToString()}
 				</span>
 			)
 		}
 		else if(time == 0) {
-			return <span class="text-danger"><i class="fa fa-clock-o me-1"></i> Waktu Habis!</span>
+			return <span class="text-danger"><i class="bi-clock-o me-1"></i> Waktu Habis!</span>
 		}
 	}
 }
@@ -1087,7 +1087,7 @@ class ButtonDoubt extends React.Component {
 				class="btn btn-sm btn-warning m-1"
 				onClick={() => this.handleClick(this.props.number)}
 			>
-				<i class={`fa ${this.props.isDoubt ? 'fa-thumbs-o-up' : 'fa-lightbulb-o'} me-1`}></i>
+				<i class={`${this.props.isDoubt ? 'bi-hand-thumbs-up' : 'bi-lightbulb'} me-1`}></i>
 				{this.props.isDoubt ? 'Yakin' : 'Ragu'}
 			</button>
 		);
@@ -1113,7 +1113,7 @@ class ButtonPrevious extends React.Component {
 					class="btn btn-sm btn-primary m-1"
 					onClick={() => this.handleClick(this.props.number)}
 				>
-					<i class="fa fa-chevron-left me-1"></i> Sebelumnya
+					<i class="bi-chevron-left me-1"></i> Sebelumnya
 				</button>
 			);
 		}
@@ -1140,7 +1140,7 @@ class ButtonNext extends React.Component {
 					class="btn btn-sm btn-primary m-1"
 					onClick={() => this.handleClick(this.props.number)}
 				>
-					Selanjutnya <i class="fa fa-chevron-right ms-1"></i>
+					Selanjutnya <i class="bi-chevron-right ms-1"></i>
 				</button>
 			);
 		}
@@ -1170,7 +1170,7 @@ class ButtonSubmit extends React.Component {
 				this.handleSubmit();
 				alert("Tes Anda sudah dikumpulkan.");
 				window.removeEventListener("beforeunload", j);
-				window.location.href = '/member';
+				window.location.href = '/member/project?id=' + document.getElementById("project_id").value;
 			}
 		}
 	}
@@ -1204,7 +1204,7 @@ class ButtonSubmit extends React.Component {
 				class="btn btn-sm btn-info m-1"
 				onClick={this.handleClick}
 			>
-				<i class="fa fa-save me-1"></i> Submit
+				<i class="bi-save me-1"></i> Submit
 			</button>
 		);
 	}

@@ -279,7 +279,7 @@ class MSDTController extends Controller
         $result->save();
 
         // Redirect
-        return redirect()->route('member.dashboard')->with(['message' => 'Berhasil mengerjakan tes '.$packet->test->name]);
+        return redirect()->route('member.project', ['id' => $request->project_id])->with(['message' => 'Berhasil mengerjakan tes '.$packet->test->name]);
     }
     /**
      * Display the specified resource.

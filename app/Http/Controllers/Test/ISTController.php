@@ -3644,8 +3644,4 @@ class ISTController extends Controller
         ];
         return $array;
     }
-
-    public static function try(Request $request, $path, $test, $selection)
-    {
-    }
 }
