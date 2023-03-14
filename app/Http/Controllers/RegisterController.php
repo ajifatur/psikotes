@@ -103,6 +103,9 @@ class RegisterController extends Controller
                 $visitor->location = location_info($request->ip());
                 $visitor->save();
             }
+            
+            // Set projects session
+            session()->put('projects', []);
 
             // Redirect
             return redirect()->route('member.dashboard');
