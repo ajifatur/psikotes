@@ -68,7 +68,7 @@
             <div class="row justify-content-start">
                 @foreach($projects as $project)
                 <div class="col-md-6 d-flex align-items-stretch col-lg-4">
-                    <a href="{{ !in_array($project->id, session()->get('projects')) ? '#' : route('member.project', ['id' => $project->id]) }}" class="btn btn-md btn-block btn-outline-dark rounded-2 d-flex border py-3 my-2 w-100 {{ !in_array($project->id, session()->get('projects')) ? 'btn-project' : '' }}" data-id="{{ $project->id }}">
+                    <a href="{{ is_array(session()->get('projects')) && !in_array($project->id, session()->get('projects')) ? '#' : route('member.project', ['id' => $project->id]) }}" class="btn btn-md btn-block btn-outline-dark rounded-2 d-flex border py-3 my-2 w-100 {{ is_array(session()->get('projects')) && !in_array($project->id, session()->get('projects')) ? 'btn-project' : '' }}" data-id="{{ $project->id }}">
                         <i class="h1 bi-clipboard-fill me-3 text-primary"></i>
                         <div class="text-start">
                             <p class="m-0 fw-bold">{{ $project->name }}</p>
