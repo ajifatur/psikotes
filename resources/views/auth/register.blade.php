@@ -9,17 +9,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://ajifatur.github.io/assets/spandiv.min.css">
+    <link rel="stylesheet" href="https://spandiv.xyz/wp-content/themes/spandiv/style.css?ver=2.3">
     <link rel="icon" type="image/x-icon" href="{{ asset ('assets/images/icon/icon-spandiv.png')}}">
 
     <title>Registrasi | {{ config('app.name') }}</title>
     <style>
+        :root{--primary:#55005b; --primary-s:#FDE1FF}
         .rounded-1 {border-radius: .5rem !important;}
         .rounded-2 {border-radius: 1rem !important;}
         .rounded-3 {border-radius: 1.5rem !important;}
         .rounded-4 {border-radius: 2rem !important;}
         #left {transition:.5s cubic-bezier(0.4, 0, 0.2, 1)}
+        .overlay{position: absolute; width:100%; height:100%; left: 0; right: 0; top: 0; bottom: 0; margin: auto; background-color:#00000070}
+        .left-side{background-color: var(--primary) ;background-image:url('assets/images/background/login-bg.png'); background-size:cover; background-repeat:no-repeat; background-position:center}
         @media(min-width: 992px){
             #left {border-radius:0 2rem 2rem 0;}
+        }
+        @media (max-width: 991.98px) {
+            .w-75{width:100%!important}
         }
         .scroll-box::-webkit-scrollbar{width: 0.5em;}
         .scroll-box::-webkit-scrollbar-track{background-color:#00000010; border-radius:1rem}
@@ -34,13 +41,15 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row bg-primary">
+        <div class="row left-side">
             <div class="col-12 col-lg-5 vh-100 bg-white shadow-lg z-1 d-flex flex-wrap align-items-center align-content-around justify-content-center" id="left">
-                <div class="w-75"><a href="https://spandiv.xyz/"><img src="https://sgp1.digitaloceanspaces.com/spandiv/images/spandiv/2022/11/JajfjbGF-Spandiv-Logo.svg" width="100" alt="logo spandiv digital solutions"></a></div>
+                <div class="w-75 text-center text-lg-start"><a href="https://spandiv.xyz/tes-psikologi"><img src="https://sgp1.digitaloceanspaces.com/spandiv/images/spandiv/2023/03/QwDjvjyK-spandiv-tes-psikologi-logo-blue.svg" width="200" alt="logo spandiv digital solutions"></a></div>
                 <form class="login-box w-75" method="post" action="{{ route('auth.register') }}">
                     @csrf
-                    <h1 class="h3 mb-3">Selamat Datang di {{ config('app.name') }}</h1>
-                    <p>🔔 Silahkan isi data dirimu buat bikin akun baru!</p>
+                    <div class="heading text-center text-lg-start">
+                        <h1 class="h3 mb-3">Selamat Datang di {{ config('app.name') }}</h1>
+                        <p>🔔 Silahkan isi data dirimu buat bikin akun baru!</p>
+                    </div>
                     <hr>
                     <div class="my-4 px-2 scroll-box" style="height:calc(100vh - 25em); overflow-y:auto; overflow-x:hidden">
                         @if($errors->has('message'))
@@ -133,30 +142,35 @@
                 </form>
                 <div class="w-75"></div>
             </div>
-            <div class="col-12 col-lg-7 bg-primary vh-100 d-none d-md-flex align-items-center justify-content-center">
-                <div class="text-center w-75">
+            <div class="col-12 col-lg-7 vh-100 d-none d-md-flex align-items-center justify-content-center">
+                <div class="overlay"></div>
+                <div class="text-center text-white w-75 z-1">
+                    <div class="mb-4">
+                        <h4>Platform Tes Psikologi Fitur & Assessment Terlengkap</h4>
+                        <p>Yuk cari tahu minat atau passionmu serta potensi dan bakatmu yang dapat menunjang karier atau usaha yang sedang atau akan kamu jalani!</p>
+                    </div>
                     <div class="rounded-3 py-5 mb-5"
-                        style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff40">
+                        style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff70">
                         <img src="{{asset('assets/images/illustrations/login.png')}}" alt="img" class="img-fluid w-50">
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-6">
-                            <div class="rounded-3 py-2 text-white" style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff40">
+                        <div class="col-lg-3 col-6 d-flex align-items-stretch">
+                            <div class="rounded-3 py-2 text-white w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff70">
                                 <p class="mb-0">Mentoring</p>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-6">
-                            <div class="rounded-3 py-2 text-white" style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff40">
+                        <div class="col-lg-3 col-6 d-flex align-items-stretch">
+                            <div class="rounded-3 py-2 text-white w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff70">
                                 <p class="mb-0">Coaching & Counseling</p>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-6">
-                            <div class="rounded-3 py-2 text-white" style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff40">
+                        <div class="col-lg-3 col-6 d-flex align-items-stretch">
+                            <div class="rounded-3 py-2 text-white w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff70">
                                 <p class="mb-0">Analisis Data Statistik</p>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-6">
-                            <div class="rounded-3 py-2 text-white" style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff40">
+                        <div class="col-lg-3 col-6 d-flex align-items-stretch">
+                            <div class="rounded-3 py-2 text-white w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff70">
                                 <p class="mb-0">Tes Psikologi</p>
                             </div>
                         </div>
