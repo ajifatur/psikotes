@@ -225,14 +225,14 @@ class ProjectController extends Controller
             // Check the project
             $project = Project::where('token','=',$request->token)->find($request->id);
 
-            // Results has been assigned
-            $results = Result::where('user_id','=',Auth::user()->id)->where('project_id','=',$project->id)->pluck('test_id')->toArray();
-
             if($project) {
                 // Push to project session
                 if(!in_array($project->id, session()->get('projects')))
                     session()->push('projects', $project->id);
                 
+                // Results has been assigned
+                $results = Result::where('user_id','=',Auth::user()->id)->where('project_id','=',$project->id)->pluck('test_id')->toArray();
+
                 // View
                 return view('member/project/index', [
                     'project' => $project,
