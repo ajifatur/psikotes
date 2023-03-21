@@ -150,27 +150,27 @@
                         <p>Yuk cari tahu minat atau passionmu serta potensi dan bakatmu yang dapat menunjang karier atau usaha yang sedang atau akan kamu jalani!</p>
                     </div>
                     <div class="rounded-3 py-5 mb-5"
-                        style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff70">
+                        style="background-color:#ffffff50; backdrop-filter:blur(10px); border:1px solid #ffffff70">
                         <img src="{{asset('assets/images/illustrations/login.png')}}" alt="img" class="img-fluid w-50">
                     </div>
                     <div class="row">
                         <div class="col-lg-3 col-6 d-flex align-items-stretch">
-                            <div class="rounded-3 py-2 text-white w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff70">
+                            <div class="rounded-3 py-2 text-white w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:#ffffff50; backdrop-filter:blur(10px); border:1px solid #ffffff70">
                                 <p class="mb-0">Mentoring</p>
                             </div>
                         </div>
                         <div class="col-lg-3 col-6 d-flex align-items-stretch">
-                            <div class="rounded-3 py-2 text-white w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff70">
+                            <div class="rounded-3 py-2 text-white w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:#ffffff50; backdrop-filter:blur(10px); border:1px solid #ffffff70">
                                 <p class="mb-0">Coaching & Counseling</p>
                             </div>
                         </div>
                         <div class="col-lg-3 col-6 d-flex align-items-stretch">
-                            <div class="rounded-3 py-2 text-white w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff70">
+                            <div class="rounded-3 py-2 text-white w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:#ffffff50; backdrop-filter:blur(10px); border:1px solid #ffffff70">
                                 <p class="mb-0">Analisis Data Statistik</p>
                             </div>
                         </div>
                         <div class="col-lg-3 col-6 d-flex align-items-stretch">
-                            <div class="rounded-3 py-2 text-white w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:#ffffff40; backdrop-filter:blur(8px); border:1px solid #ffffff70">
+                            <div class="rounded-3 py-2 text-white w-100 h-100 d-flex align-items-center justify-content-center" style="background-color:#ffffff50; backdrop-filter:blur(10px); border:1px solid #ffffff70">
                                 <p class="mb-0">Tes Psikologi</p>
                             </div>
                         </div>

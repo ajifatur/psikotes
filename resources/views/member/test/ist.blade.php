@@ -3,16 +3,13 @@
 @section('content')
 
 <div class="bg-theme-1 bg-header">
-    <div class="container text-center text-white">
-        <h3>{{ $packet->name }}</h3>
-		<p class="m-0"><a href="#" class="text-white" data-bs-toggle="modal" data-bs-target="#tutorialModal"><u>Lihat Petunjuk Pengerjaan Disini</u></a></p>
-    </div>
-</div>
-
-<div class="custom-shape-divider-top-1617767620">
-    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M0,0V7.23C0,65.52,268.63,112.77,600,112.77S1200,65.52,1200,7.23V0Z" class="shape-fill"></path>
-    </svg>
+	<div class="container">
+		<div class="text-center rounded-2 shadow-sm p-3 bg-glass-light">
+			<h3 class="m-0 text-white">{{ $packet->name }}</h3>
+			<hr>
+			<p class="m-0"><a href="#" class="text-white" data-bs-toggle="modal" data-bs-target="#tutorialModal"><u>Lihat Petunjuk Pengerjaan Disini</u></a></p>
+		</div>
+	</div>
 </div>
 
 <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">

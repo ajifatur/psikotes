@@ -2,16 +2,13 @@
 
 @section('content')
 <div class="bg-theme-1 bg-header">
-    <div class="container text-center text-white">
-        <h3>{{ $packet->name }}</h3>
-    </div>
+	<div class="container">
+		<div class="d-md-flex align-items-center justify-content-center text-center rounded-2 shadow-sm p-3 bg-glass-light">
+			<h3 class="m-0 text-white">{{ $packet->name }}</h3>
+		</div>
+	</div>
 </div>
-<div class="custom-shape-divider-top-1617767620">
-    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M0,0V7.23C0,65.52,268.63,112.77,600,112.77S1200,65.52,1200,7.23V0Z" class="shape-fill"></path>
-    </svg>
-</div>
-<div class="container main-container">\
+<div class="container main-container">
 	<div class="row" style="margin-bottom:100px">
 	    <div class="col-12">
 		    <form id="form" method="post" action="{{ route('member.test.store', ['path' => $path]) }}">
@@ -26,7 +23,7 @@
 					    <div class="col-12">
                             <div class="card soal rounded-1 mb-3">
                       			<div class="card-header bg-transparent">
-					    			<span class="num fw-bold"><i class="bi-pencil-square"></i> Soal {{$question['id']}}</span>
+					    			<span class="num fw-bold"><i class="fad fa-edit"></i> Soal {{$question['id']}}</span>
 					    		</div>
                                 <div class="card-body">
                                     <table class="table table-borderless">
@@ -73,7 +70,7 @@
 					<span id="answered">0</span>/<span id="total"></span> Soal Terjawab
 				</li>
 				<li class="nav-item ms-3">
-					<a href="#" class="text-secondary" data-bs-toggle="modal" data-bs-target="#tutorialModal" title="Tutorial"><i class="bi-question-circle" style="font-size: 1.5rem"></i></a>
+					<a href="#" class="text-secondary" data-bs-toggle="modal" data-bs-target="#tutorialModal" title="Tutorial"><i class="fad fa-question-circle" style="font-size: 1.5rem"></i></a>
 				</li>
 				<li class="nav-item ms-3">
 					<button class="btn btn-md btn-primary text-uppercase " id="btn-submit" disabled>Submit</button>
@@ -86,10 +83,10 @@
 	    	<div class="modal-content">
 	      		<div class="modal-header">
 	        		<h5 class="modal-title" id="exampleModalLabel">
-	        			<span class="bg-warning rounded-1 text-center px-3 py-2 me-2"><i class="bi-lightbulb text-dark" aria-hidden="true"></i></span> 
-	        			Tutorial Tes
-	        		</h5>
-	        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <span class="bg-warning rounded-1 text-center px-3 py-2 me-2"><i class="fad fa-lightbulb-on" aria-hidden="true"></i></span> 
+                        Tutorial Tes
+                    </h5>
+	        		<button type="button" class="btn" data-bs-dismiss="modal"><i class="fad fa-times"></i></button>
 	      		</div>
 		      	<div class="modal-body">
 		      	    <p>Pada tes ini, Anda akan membaca sejumlah pernyataan mengenai tindakan yang mungkin Anda lakukan dalam tugas Anda di perusahaan.</p>

@@ -3,10 +3,10 @@
 @section('content')
 
 <section>
-    <div class="bg-theme-1 text-white" style="padding: 7em 0 8em 0; background-image:url('/assets/images/background/bg-tes.svg')">
+    <div class="bg-theme-1 bg-header">
         <div class="container">
-            <div class="d-flex align-items-center rounded-2 shadow-sm p-3 bg-glass-light">
-                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="70" height="70" style="background:url('/assets/images/default/default-man.png'); background-size:70px; background-position:center; border:2px solid #fff" class="me-3 rounded-circle">
+            <div class="d-md-flex align-items-center text-center text-md-start rounded-2 shadow-sm p-3 bg-glass-light">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="70" height="70" style="background:url('/assets/images/default/default-man.png'); background-size:70px; background-position:center; border:2px solid #fff" class="me-0 me-md-3 mb-3 mb-md-0 rounded-circle">
                 <div>
                     <p class="fw-bold text-capitalize mb-0">{{ Auth::user()->name }}</p>
                     <p class="mb-0">Selamat datang di Tes Online Psikologi.<br>Kamu dapat melakukan tes online dengan memilih project yang ada di bawah ini.</p>
@@ -22,35 +22,34 @@
     </div>
 
     <section class="container"> 
-        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div id="carousel-profile" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-indicators mb-0">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active bg-dark rounded-circle" style="width:8px; height:8px" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" class=" bg-dark rounded-circle" style="width:8px; height:8px" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" class=" bg-dark rounded-circle" style="width:8px; height:8px" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carousel-profile" data-bs-slide-to="0" class="active bg-dark rounded-circle" style="width:8px; height:8px" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carousel-profile" data-bs-slide-to="1" class=" bg-dark rounded-circle" style="width:8px; height:8px" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carousel-profile" data-bs-slide-to="2" class=" bg-dark rounded-circle" style="width:8px; height:8px" aria-label="Slide 3"></button>
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="d-flex align-items-start py-3 px-3 border rounded-2">
                     <img width="50" class="me-3" src="https://tes.spandiv.xyz/assets/images/icon/study.png">
-                    <p class="mb-0">Taukah kamu?<br> Tes psikologi mampu untuk memprediksi potensi pencapaian hasil belajar dan kemampuan kamu.</p>
+                    <p class="mb-0"><span class="fw-bold">Taukah kamu?</span><br> Tes psikologi mampu untuk memprediksi potensi pencapaian hasil belajar dan kemampuan kamu.</p>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="d-flex align-items-start py-3 px-3 border rounded-2">
                     <img width="50" class="me-3" src="https://tes.spandiv.xyz/assets/images/icon/panic-attack.png">
-                    <p class="mb-0">Taukah kamu?<br> Tes psikologi memberikan gambaran mengenai penyebab masalah yang mempengaruhi proses.</p>
+                    <p class="mb-0"><span class="fw-bold">Taukah kamu?</span><br> Tes psikologi memberikan gambaran mengenai penyebab masalah yang mempengaruhi proses.</p>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="d-flex align-items-start py-3 px-3 border rounded-2">
                     <img width="50" class="me-3" src="https://tes.spandiv.xyz/assets/images/icon/worker.png">
-                    <p class="mb-0">Taukah kamu?<br> Tes psikologi bisa membantu perusahaan untuk memilih sumber daya manusia yang terbaik.</p>
+                    <p class="mb-0"><span class="fw-bold">Taukah kamu?</span><br> Tes psikologi bisa membantu perusahaan untuk memilih sumber daya manusia yang terbaik.</p>
                 </div>
             </div>
           </div>
-          <button class="carousel-control-next d-none d-md-flex" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <img width="40" src="https://tes.spandiv.xyz/assets/images/icon/next.png"
-                 style="filter: hue-rotate(110deg);">
+          <button class="carousel-control-next d-none d-md-flex" type="button" data-bs-target="#carousel-profile" data-bs-slide="next">
+            <i class="fad fa-chevron-right text-primary"></i>
           </button>
         </div>  
         @if(Session::get('message'))
@@ -69,10 +68,10 @@
                 @foreach($projects as $project)
                 <div class="col-md-6 d-flex align-items-stretch col-lg-4">
                     <a href="{{ is_array(session()->get('projects')) && in_array($project->id, session()->get('projects')) ? route('member.project', ['id' => $project->id]) : '#' }}" class="btn btn-md btn-block btn-outline-dark rounded-2 d-flex border py-3 my-2 w-100 {{ is_array(session()->get('projects')) && in_array($project->id, session()->get('projects')) ? '' : 'btn-project' }}" data-id="{{ $project->id }}">
-                        <i class="h1 bi-clipboard-fill me-3 text-primary"></i>
+                        <i class="fad fa-clipboard-list-check h1 mb-0 me-3 text-primary"></i>
                         <div class="text-start">
                             <p class="m-0 fw-bold">{{ $project->name }}</p>
-                            <p class="m-0 small fw-normal"><i class="bi-calendar2 text-primary"></i> Sampai {{ date('d/m/Y',strtotime($project->date_to)) }}</p>
+                            <p class="m-0 small fw-normal"><i class="fad fa-calendar-minus text-primary"></i> Sampai {{ date('d/m/Y',strtotime($project->date_to)) }}</p>
                         </div>
                     </a>
                 </div>

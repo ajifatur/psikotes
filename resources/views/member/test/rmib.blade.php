@@ -2,12 +2,11 @@
 
 @section('content')
 <div class="bg-theme-1 bg-header">
-    <h3 class="m-0 text-center text-white">{{ $packet->name }}</h3>
-</div>
-<div class="custom-shape-divider-top-1617767620">
-    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M0,0V7.23C0,65.52,268.63,112.77,600,112.77S1200,65.52,1200,7.23V0Z" class="shape-fill"></path>
-    </svg>
+	<div class="container">
+		<div class="d-md-flex align-items-center justify-content-center text-center rounded-2 shadow-sm p-3 bg-glass-light">
+			<h3 class="m-0 text-white">{{ $packet->name }}</h3>
+		</div>
+	</div>
 </div>
 <div class="container main-container">
 	<div class="row" style="margin-bottom:100px">
@@ -24,7 +23,7 @@
         			<div class="col-lg-8 mx-auto" style="margin-top: 20px;">
         				<div class="card soal rounded-1">
                             <div class="card-header bg-transparent">
-                                <span class="num fw-bold" data-id="{{ $q->number }}"><i class="bi-pencil-square"></i> Soal {{ $q->number }}</span>
+                                <span class="num fw-bold" data-id="{{ $q->number }}"><i class="fad fa-edit"></i> Soal {{ $q->number }}</span>
                             </div>
                             @php
                                 $questions_array = json_decode($q->description, true);
@@ -84,7 +83,7 @@
 					<span id="answered">0</span>/<span id="total"></span> Soal Terjawab
 				</li>
 				<li class="nav-item ms-3">
-					<a href="#" class="text-secondary" data-bs-toggle="modal" data-bs-target="#tutorialModal" title="Tutorial"><i class="bi-question-circle" style="font-size: 1.5rem"></i></a>
+					<a href="#" class="text-secondary" data-bs-toggle="modal" data-bs-target="#tutorialModal" title="Tutorial"><i class="fad fa-question-circle" style="font-size: 1.5rem"></i></a>
 				</li>
 				<li class="nav-item ms-3">
 					<button class="btn btn-md btn-primary text-uppercase " id="btn-submit" disabled>Submit</button>
@@ -97,10 +96,10 @@
 	    	<div class="modal-content">
 	      		<div class="modal-header">
 	        		<h5 class="modal-title" id="exampleModalLabel">
-                        <span class="bg-warning rounded-1 text-center px-3 py-2 me-2"><i class="bi-lightbulb text-dark" aria-hidden="true"></i></span> 
+                        <span class="bg-warning rounded-1 text-center px-3 py-2 me-2"><i class="fad fa-lightbulb-on" aria-hidden="true"></i></span> 
                         Tutorial Tes
                     </h5>
-	        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	        		<button type="button" class="btn" data-bs-dismiss="modal"><i class="fad fa-times"></i></button>
 	      		</div>
 		      	<div class="modal-body">
                     <p>Dibawah ini anda akan menemui daftar-daftar berbagai macam pekerjaan yang tersusun dalam berbagai kelompok. Setiap kelompok terdiri dari 12 macam pekerjaan. Setiap pekerjaan merupakan keahlian khusus yang memerlukan latihan atau pendidikan keahlian sendiri. Mungkin hanya beberapa diantaranya yang anda sukai. Disini anda diminta untuk memilih pekerjaan mana yang ingin anda lakukan atau pekerjaan mana yang anda sukai, terlepas dari besarnya upah gaji yang akan anda terima. Juga terlepas apakah anda berhasil atau tidak dalam mengerjakan pekerjaan tersebut.</p>

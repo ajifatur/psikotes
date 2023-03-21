@@ -2,16 +2,13 @@
 
 @section('content')
 <div class="bg-theme-1 bg-header">
-    <div class="container text-center text-white">
-        <h3>{{ $packet->name }}</h3>
-        <hr class="rounded-2" style="border-top: 5px solid rgba(255,255,255,.3)">
-        <p class="m-0"><b>ITEM 1-20</b> : Saat anda memberikan 10 poin pada masing-masing dari sepuluh pernyataan di bawah ini, berpikir tentang situasi di tempat kerja, di sekolah, di rumah, dan bersama teman-teman, tetapi selalu berpikir tentang situasi……</br><b>di mana segala sesuatu tak beres dan anda berkonflik dengan orang lain.</b></p>
-    </div>
-</div>
-<div class="custom-shape-divider-top-1617767620">
-    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M0,0V7.23C0,65.52,268.63,112.77,600,112.77S1200,65.52,1200,7.23V0Z" class="shape-fill"></path>
-    </svg>
+	<div class="container">
+		<div class="text-center rounded-2 shadow-sm p-3 bg-glass-light">
+			<h3 class="m-0 text-white">{{ $packet->name }}</h3>
+            <hr>
+            <p class="m-0"><b>ITEM 1-20</b> : Saat anda memberikan 10 poin pada masing-masing dari sepuluh pernyataan di bawah ini, berpikir tentang situasi di tempat kerja, di sekolah, di rumah, dan bersama teman-teman, tetapi selalu berpikir tentang situasi……</br><b>di mana segala sesuatu tak beres dan anda berkonflik dengan orang lain.</b></p>
+		</div>
+	</div>
 </div>
 <div class="container main-container">
 	<div class="row" style="margin-bottom:100px">
@@ -28,7 +25,7 @@
                 @php $nomor++; @endphp
                 <div class="card soal rounded-1 mb-3">
                     <div class="card-header bg-transparent">
-                        <span class="fw-bold fst-italic num"><i class="bi-pencil-square"></i> Soal {{$nomor}}. {{$value['header']}}</span>
+                        <span class="fw-bold fst-italic num"><i class="fad fa-edit"></i> Soal {{$nomor}}. {{$value['header']}}</span>
                     </div>
                     <div class="card-body">
                         <div class="row">

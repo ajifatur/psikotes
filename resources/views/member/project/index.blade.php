@@ -3,13 +3,13 @@
 @section('content')
 
 <section>
-    <div class="bg-theme-1 text-white" style="padding: 7em 0 8em 0; background-image:url('/assets/images/background/bg-tes.svg')">
+    <div class="bg-theme-1 bg-header">
         <div class="container">
-            <div class="d-flex align-items-center rounded-2 shadow-sm p-3 bg-glass-light">
-                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="70" height="70" style="background:url('/assets/images/default/default-man.png'); background-size:70px; background-position:center; border:2px solid #fff" class="me-3 rounded-circle">
+            <div class="d-md-flex align-items-center text-center text-md-start rounded-2 shadow-sm p-3 bg-glass-light">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="70" height="70" style="background:url('/assets/images/default/default-man.png'); background-size:70px; background-position:center; border:2px solid #fff" class="me-0 me-md-3 mb-3 mb-md-0 rounded-circle">
                 <div>
                     <p class="fw-bold text-capitalize mb-0">{{ Auth::user()->name }}</p>
-                    <p class="mb-0">Selamat datang di Tes Online Psikologi.<br>Kamu dapat melakukan tes online dengan memilih tes yang ada di bawah ini.</p>
+                    <p class="mb-0">Selamat datang di Tes Online Psikologi.<br>Kamu dapat melakukan tes online dengan memilih project yang ada di bawah ini.</p>
                 </div>
             </div>
         </div>
