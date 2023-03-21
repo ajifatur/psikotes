@@ -25,7 +25,7 @@
         </a>
         <ul class="nav navbar-nav">
             <li class="nav-item">
-                <a class="nav-link fw-bold btn-logout" href="#"><span class="d-none d-md-inline">Keluar</span> <i class="fad fa-long-arrow-right"></i></a>
+                <a class="nav-link fw-bold btn-logout" href="#"><span class="d-none d-md-inline">Keluar</span> <i class="fad fa-sign-out"></i></a>
                 <form id="form-logout" class="d-none" method="post" action="{{ route('auth.logout') }}">@csrf</form>
             </li>
         </ul>
