@@ -30,20 +30,20 @@
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-                <div class="d-flex align-items-start py-3 px-3 border rounded-2">
-                    <img width="50" class="me-3" src="https://tes.spandiv.xyz/assets/images/icon/study.png">
+                <div class="d-block d-md-flex align-items-start py-3 px-3 border rounded-2">
+                    <img width="50" class="mb-2 mb-lg-0 me-3" src="{{ asset ('assets/images/icon/study.png') }}">
                     <p class="mb-0"><span class="fw-bold">Taukah kamu?</span><br> Tes psikologi mampu untuk memprediksi potensi pencapaian hasil belajar dan kemampuan kamu.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-flex align-items-start py-3 px-3 border rounded-2">
-                    <img width="50" class="me-3" src="https://tes.spandiv.xyz/assets/images/icon/panic-attack.png">
+                <div class="d-block d-md-flex align-items-start py-3 px-3 border rounded-2">
+                    <img width="50" class="mb-2 mb-lg-0 me-3" src="{{ asset ('assets/images/icon/swearing.png') }}">
                     <p class="mb-0"><span class="fw-bold">Taukah kamu?</span><br> Tes psikologi memberikan gambaran mengenai penyebab masalah yang mempengaruhi proses.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-flex align-items-start py-3 px-3 border rounded-2">
-                    <img width="50" class="me-3" src="https://tes.spandiv.xyz/assets/images/icon/worker.png">
+                <div class="d-block d-md-flex align-items-start py-3 px-3 border rounded-2">
+                    <img width="50" class="mb-2 mb-lg-0 me-3" src="{{ asset ('assets/images/icon/worker.png') }}">
                     <p class="mb-0"><span class="fw-bold">Taukah kamu?</span><br> Tes psikologi bisa membantu perusahaan untuk memilih sumber daya manusia yang terbaik.</p>
                 </div>
             </div>
