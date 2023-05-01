@@ -29,9 +29,9 @@ class ResultController extends Controller
         if(Auth::user()->role_id == role('super-admin')) {
             // Get results
             if($project)
-                $results = Result::has('user')->where('project_id','=',$project->id)->get();
+                $results = Result::has('user')->where('project_id','=',$project->id)->orderBy('created_at','desc')->get();
             else
-                $results = Result::has('user')->get();
+                $results = Result::has('user')->orderBy('created_at','desc')->get();
 
             // Get projects
             $projects = Project::latest()->get();
@@ -44,12 +44,12 @@ class ResultController extends Controller
             if($project) {
                 $results = Result::has('user')->whereHas('project', function (Builder $query) use ($project, $user) {
                     return $query->where('id','=',$project->id)->where('user_id','=',$user->id);
-                })->get();
+                })->orderBy('created_at','desc')->get();
             }
             else {
                 $results = Result::has('user')->whereHas('project', function (Builder $query) use ($user) {
                     return $query->where('user_id','=',$user->id);
-                })->get();
+                })->orderBy('created_at','desc')->get();
             }
 
             // Get projects
