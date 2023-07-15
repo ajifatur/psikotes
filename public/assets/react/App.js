@@ -309,6 +309,7 @@ class ModalTutorial extends React.Component {
 			isTrying: 0,
 			isMemorizing: null,
 			timeMemorizing: 0,
+			showButton: 1,
 			answers: [],
 			checkAnswers: [],
 			keyAnswers: []
@@ -421,7 +422,8 @@ class ModalTutorial extends React.Component {
 	handleMemorize = () => {
 		this.setState({
 			isMemorizing: 0,
-			timeMemorizing: this.props.item.memorizing_time
+			timeMemorizing: this.props.item.memorizing_time,
+			showButton: 0
 		});
 
 		let time = this.props.item.memorizing_time;
@@ -639,7 +641,7 @@ class ModalTutorial extends React.Component {
 		// HTML entity decode
 		const HTMLEntityDecode = (escapedHTML) => React.createElement("div", { dangerouslySetInnerHTML: { __html: escapedHTML } });
 		
-		const {isTrying, isMemorizing, timeMemorizing} = this.state;
+		const {isTrying, isMemorizing, timeMemorizing, showButton} = this.state;
 		
 		return (
 			<div class="modal fade" id="tutorialModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -652,7 +654,7 @@ class ModalTutorial extends React.Component {
 						<div class="modal-body">
 							{HTMLEntityDecode(this.props.item.tutorial)}
 							<div class="mt-2">
-								<button type="button" class={`btn btn-sm btn-info ${this.props.item.type === 'choice-memo' && isMemorizing !== 1 ? '' : 'd-none'}`} onClick={this.handleMemorize}>
+								<button type="button" class={`btn btn-sm btn-info ${this.props.item.type === 'choice-memo' ? showButton === 1 ? '' : 'd-none' : 'd-none'}`} onClick={this.handleMemorize}>
 									<i class="bi-clipboard me-1"></i>Membaca Hafalan
 								</button>
 							</div>
