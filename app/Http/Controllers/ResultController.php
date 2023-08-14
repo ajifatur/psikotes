@@ -145,7 +145,7 @@ class ResultController extends Controller
             abort(404);
         // MSDT
         elseif($request->path == 'msdt')
-            return \App\Http\Controllers\Test\MSDtController::print($request);
+            return \App\Http\Controllers\Test\MSDTController::print($request);
         // Papikostick
         elseif($request->path == 'papikostick')
             return \App\Http\Controllers\Test\PapikostickController::print($request);
