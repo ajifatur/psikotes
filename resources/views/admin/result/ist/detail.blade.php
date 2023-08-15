@@ -6,7 +6,7 @@
 
 <div class="d-sm-flex justify-content-between align-items-center mb-3">
     <h1 class="h3 mb-2 mb-sm-0">Data Hasil Tes</h1>
-    <!-- <a href="#" class="btn btn-sm btn-primary btn-print"><i class="bi-printer me-1"></i> Cetak</a> -->
+    <a href="#" class="btn btn-sm btn-primary btn-print"><i class="bi-printer me-1"></i> Cetak</a>
 </div>
 <div class="row">
     <div class="col-md-4 col-xl-3">
@@ -200,6 +200,7 @@
 
 <form id="form-print" class="d-none" method="post" action="{{ route('admin.result.print') }}" target="_blank">
     @csrf
+    <input type="hidden" name="id" value="{{ $result->id }}">
     <input type="hidden" name="name" value="{{ $result->user->name }}">
     <input type="hidden" name="age" value="{{ \Ajifatur\Helpers\DateTimeExt::diff($result->user->attribute->birthdate, $result->created_at).' tahun' }}">
     <input type="hidden" name="gender" value="{{ gender($result->user->attribute->gender) }}">
@@ -214,9 +215,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
 <script type="text/javascript">
-    function generateChart(){
+    function generateChart() {
         var url = mostChart.toBase64Image();
-        document.getElementById("chart").value = url;
+        document.getElementById("image").value = url;
     }
     var ctx1 = document.getElementById('chart').getContext('2d');
     var mostChart = new Chart(ctx1, {

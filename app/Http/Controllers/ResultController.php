@@ -142,7 +142,7 @@ class ResultController extends Controller
             return \App\Http\Controllers\Test\DISC40Controller::print($request);
         // IST
         elseif($request->path == 'ist')
-            abort(404);
+            return \App\Http\Controllers\Test\ISTController::print($request);
         // MSDT
         elseif($request->path == 'msdt')
             return \App\Http\Controllers\Test\MSDTController::print($request);

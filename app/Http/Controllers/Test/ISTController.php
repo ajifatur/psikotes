@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Test;
 
 use Auth;
+use PDF;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Packet;
@@ -61,6 +62,44 @@ class ISTController extends Controller
             'resultA' => $resultA,
             'kategoriIQ' => $kategoriIQ
         ]);
+    }
+    
+    /**
+     * Print to PDF.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function print(Request $request)
+    {
+        // Set the result
+        $result = Result::find($request->id);
+        $result->result = json_decode($result->result, true);
+		
+        // IQ Category
+        $kategoriIQ = '';
+        if($result['IQ'] <= 80) $kategoriIQ = 'Dibawah Rata-Rata';
+        elseif($result['IQ'] >= 81 && $result['IQ'] <= 94) $kategoriIQ = 'Rata-Rata Bawah';
+        elseif($result['IQ'] >= 95 && $result['IQ'] <= 99) $kategoriIQ = 'Rata-Rata';
+        elseif($result['IQ'] >= 100 && $result['IQ'] <= 104) $kategoriIQ = 'Rata-Rata Atas';
+        elseif($result['IQ'] >= 105 && $result['IQ'] <= 118) $kategoriIQ = 'Superior';
+        elseif($result['IQ'] >= 119) $kategoriIQ = 'Sangat Superior';
+        
+        // PDF
+        $pdf = PDF::loadview('admin/result/ist/pdf', [
+            'result' => $result,
+            'image' => $request->image,
+            'name' => $request->name,
+            'age' => $request->age,
+            'gender' => $request->gender,
+            'position' => $request->position,
+            'test' => $request->test,
+            'resultA' => $result->result,
+            'kategoriIQ' => $kategoriIQ
+        ]);
+        $pdf->setPaper('A4', 'portrait');
+        
+        return $pdf->stream($request->name . '_' . $request->test . '.pdf');
     }
     
     /**
