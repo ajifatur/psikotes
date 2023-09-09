@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Ajifatur\Helpers\DateTimeExt;
+use Ajifatur\FaturHelper\Models\UserAttribute;
+use App\Imports\MemberImport;
 use App\Models\User;
 
 class MemberController extends Controller
@@ -30,203 +33,6 @@ class MemberController extends Controller
         return view('admin/member/index', [
             'users' => $users
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        // Check the access
-        has_access(__METHOD__, Auth::user()->role_id);
-
-        // Get roles
-        $roles = Role::orderBy('num_order','asc')->get();
-
-        // View
-        return view('faturhelper::admin/user/create', [
-            'roles' => $roles
-        ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        // Validation
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:200',
-            'birthdate' => 'required',
-            'gender' => 'required',
-            'country_code' => 'required',
-            'phone_number' => 'required|numeric',
-            'role' => 'required',
-            'email' => 'required|email|unique:users',
-            'username' => 'required|alpha_dash|min:4|unique:users',
-            'password' => 'required|min:6',
-            'status' => 'required'
-        ]);
-        
-        // Check errors
-        if($validator->fails()) {
-            // Back to form page with validation error messages
-            return redirect()->back()->withErrors($validator->errors())->withInput();
-        }
-        else {
-            // Save the user
-            $user = new User;
-            $user->role_id = $request->role;
-            $user->name = $request->name;
-            $user->username = $request->username;
-            $user->email = $request->email;
-            $user->email_verified_at = null;
-            $user->password = bcrypt($request->password);
-            $user->remember_token = null;
-            $user->access_token = access_token();
-            $user->avatar = null;
-            $user->status = $request->status;
-            $user->last_visit = null;
-            $user->save();
-
-            // Save the user attribute
-            $user_attribute = new UserAttribute;
-            $user_attribute->user_id = $user->id;
-            $user_attribute->birthdate = DateTimeExt::change($request->birthdate);
-            $user_attribute->gender = $request->gender;
-            $user_attribute->country_code = $request->country_code;
-            $user_attribute->dial_code = dial_code($request->country_code);
-            $user_attribute->phone_number = $request->phone_number;
-            $user_attribute->save();
-            
-            // Upload the image
-            if($request->photo_source != '') {
-                $image = $request->photo_source;
-                $image = str_replace('data:image/png;base64,', '', $image);
-                $image = str_replace(' ', '+', $image);
-                $imageName = date('Y-m-d-H-i-s').'.'.'png';
-                File::put(public_path('assets/images/users'). '/' . $imageName, base64_decode($image));
-
-                // Update the user avatar
-                $user->avatar = $imageName;
-                $user->save();
-
-                // Save user avatar
-                $user_avatar = new UserAvatar;
-                $user_avatar->user_id = $user->id;
-                $user_avatar->avatar = $user->avatar;
-                $user_avatar->save();
-            }
-
-            // Redirect
-            return redirect()->route('admin.user.index')->with(['message' => 'Berhasil menambah data.']);
-        }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        // Check the access
-        has_access(__METHOD__, Auth::user()->role_id);
-
-        // Get the user
-        $user = User::findOrFail($id);
-
-        // Get roles
-        $roles = Role::orderBy('num_order','asc')->get();
-
-        // View
-        return view('faturhelper::admin/user/edit', [
-            'user' => $user,
-            'roles' => $roles
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        // Validation
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:200',
-            'birthdate' => 'required',
-            'gender' => 'required',
-            'country_code' => 'required',
-            'phone_number' => 'required|numeric',
-            'role' => 'required',
-            'email' => [
-                'required', 'email', Rule::unique('users')->ignore($request->id, 'id')
-            ],
-            'username' => [
-                'required', 'alpha_dash', 'min:4', Rule::unique('users')->ignore($request->id, 'id')
-            ],
-            'password' => $request->password != '' ? 'required|min:6' : '',
-            'status' => 'required'
-        ]);
-        
-        // Check errors
-        if($validator->fails()) {
-            // Back to form page with validation error messages
-            return redirect()->back()->withErrors($validator->errors())->withInput();
-        }
-        else {
-            // Update the user
-            $user = User::find($request->id);
-            $user->role_id = $request->role;
-            $user->name = $request->name;
-            $user->username = $request->username;
-            $user->email = $request->email;
-            $user->password = $request->password != '' ? bcrypt($request->password) : $user->password;
-            $user->status = $request->status;
-            $user->save();
-
-            // Update or save the user attribute
-            $user_attribute = UserAttribute::where('user_id','=',$user->id)->first();
-            if(!$user_attribute) $user_attribute = new UserAttribute;
-            $user_attribute->user_id = $user->id;
-            $user_attribute->birthdate = DateTimeExt::change($request->birthdate);
-            $user_attribute->gender = $request->gender;
-            $user_attribute->country_code = $request->country_code;
-            $user_attribute->dial_code = dial_code($request->country_code);
-            $user_attribute->phone_number = $request->phone_number;
-            $user_attribute->save();
-            
-            // Upload the image
-            if($request->photo_source != '') {
-                $image = $request->photo_source;
-                $image = str_replace('data:image/png;base64,', '', $image);
-                $image = str_replace(' ', '+', $image);
-                $imageName = date('Y-m-d-H-i-s').'.'.'png';
-                File::put(public_path('assets/images/users'). '/' . $imageName, base64_decode($image));
-
-                // Update the user avatar
-                $user->avatar = $imageName;
-                $user->save();
-
-                // Save user avatar
-                $user_avatar = new UserAvatar;
-                $user_avatar->user_id = $user->id;
-                $user_avatar->avatar = $user->avatar;
-                $user_avatar->save();
-            }
-
-            // Redirect
-            return redirect()->route('admin.user.index')->with(['message' => 'Berhasil mengupdate data.']);
-        }
     }
 
     /**
@@ -302,6 +108,58 @@ class MemberController extends Controller
             }
             else {
                 return redirect()->route('admin.member.index')->with(['message' => 'Berhasil menghapus data.']);
+            }
+        }
+    }
+
+    /**
+     * Import from Excel.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function import(Request $request)
+    {
+        // Check the access
+        // has_access(__METHOD__, Auth::user()->role_id);
+
+		ini_set("memory_limit", "-1");
+        ini_set("max_execution_time", "-1");
+
+        // Get array
+		$array = Excel::toArray(new MemberImport, public_path('assets/excel/DesktopIP Employee Training List.xlsx'));
+        if(count($array)>0) {
+            foreach($array[0] as $key=>$data) {
+                if($data[0] != null) {
+                    // Save the user
+                    $user = User::where('email','=',$data[2])->first();
+                    if(!$user) $user = new User;
+                    $user->role_id = role('member');
+                    $user->name = $data[0];
+                    $user->username = $data[1];
+                    $user->email = $data[2];
+                    $user->email_verified_at = null;
+                    $user->password = bcrypt($data[3]);
+                    $user->remember_token = null;
+                    $user->access_token = access_token();
+                    $user->avatar = null;
+                    $user->status = 1;
+                    $user->last_visit = null;
+                    $user->save();
+
+                    // Save the user attribute
+                    $user_attribute = new UserAttribute;
+                    $user_attribute->user_id = $user->id;
+                    $user_attribute->birthdate = null;
+                    $user_attribute->gender = null;
+                    $user_attribute->country_code = null;
+                    $user_attribute->dial_code = null;
+                    $user_attribute->phone_number = null;
+                    $user_attribute->occupation = $data[4];
+                    $user_attribute->position = $data[5];
+                    $user_attribute->institution = $data[6];
+                    $user_attribute->save();
+                }
             }
         }
     }

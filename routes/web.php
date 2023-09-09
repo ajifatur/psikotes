@@ -62,6 +62,7 @@ Route::group(['middleware' => ['faturhelper.admin']], function() {
     Route::get('/admin/member', 'MemberController@index')->name('admin.member.index');
     Route::post('/admin/member/delete', 'MemberController@delete')->name('admin.member.delete');
     Route::post('/admin/member/delete-bulk', 'MemberController@deleteBulk')->name('admin.member.delete-bulk');
+    // Route::get('/admin/member/import', 'MemberController@import')->name('admin.member.import');
 });
 
 Route::group(['middleware' => ['faturhelper.nonadmin']], function() {
