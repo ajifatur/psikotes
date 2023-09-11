@@ -20,11 +20,11 @@
                     </li>
                     <li class="list-group-item px-0 py-1">
                         <span class="d-block fw-bold">Usia:</span>
-                        <span class="d-block">{{ \Ajifatur\Helpers\DateTimeExt::diff($result->user->attribute->birthdate, $result->created_at).' tahun' }}</span>
+                        <span class="d-block">{{ $result->user->attribute->birthdate != null ? \Ajifatur\Helpers\DateTimeExt::diff($result->user->attribute->birthdate, $result->created_at).' tahun' : '-' }}</span>
                     </li>
                     <li class="list-group-item px-0 py-1">
                         <span class="d-block fw-bold">Jenis Kelamin:</span>
-                        <span class="d-block">{{ gender($result->user->attribute->gender) }}</span>
+                        <span class="d-block">{{ $result->user->attribute->gender != null ? gender($result->user->attribute->gender) : '-' }}</span>
                     </li>
                     <li class="list-group-item px-0 py-1">
                         <span class="d-block fw-bold">Tes:</span>
@@ -127,8 +127,8 @@
     @csrf    
     <input type="hidden" name="id" value="{{ $result->id }}">
     <input type="hidden" name="name" value="{{ $result->user->name }}">
-    <input type="hidden" name="age" value="{{ \Ajifatur\Helpers\DateTimeExt::diff($result->user->attribute->birthdate, $result->created_at).' tahun' }}">
-    <input type="hidden" name="gender" value="{{ gender($result->user->attribute->gender) }}">
+    <input type="hidden" name="age" value="{{ $result->user->attribute->birthdate != null ? \Ajifatur\Helpers\DateTimeExt::diff($result->user->attribute->birthdate, $result->created_at).' tahun' : '-' }}">
+    <input type="hidden" name="gender" value="{{ $result->user->attribute->gender != null ? gender($result->user->attribute->gender) : '-' }}">
     <input type="hidden" name="test" value="{{ $result->test->name }}">
     <input type="hidden" name="path" value="{{ $result->test->code }}">
     <input type="hidden" name="image" id="image">
