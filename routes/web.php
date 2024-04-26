@@ -68,6 +68,10 @@ Route::group(['middleware' => ['faturhelper.admin']], function() {
 Route::group(['middleware' => ['faturhelper.nonadmin']], function() {
     // Dashboard
     Route::get('/member', 'DashboardController@index')->name('member.dashboard');
+	
+	// Profile
+    Route::get('/member/profile/edit', 'ProfileController@edit')->name('member.profile.edit');
+    Route::post('/member/profile/update', 'ProfileController@update')->name('member.profile.update');
 
     // Check Project
     Route::get('/member/project', 'ProjectController@check')->name('member.project');
