@@ -42,13 +42,17 @@
                             <tr>
                                 <td align="center"><input type="checkbox" class="form-check-input checkbox-one" data-id="{{ $user->id }}"></td>
                                 <td>{{ $user->name }}</td>
-                                <td>{{ $user->attribute->birthdate != null ? date('d/m/Y', strtotime($user->attribute->birthdate)) : '-' }}</td>
-                                <td>{{ $user->attribute->gender != null ? gender($user->attribute->gender) : '-' }}</td>
+                                <td>{{ $user->attribute && $user->attribute->birthdate != null ? date('d/m/Y', strtotime($user->attribute->birthdate)) : '-' }}</td>
+                                <td>{{ $user->attribute && $user->attribute->gender != null ? gender($user->attribute->gender) : '-' }}</td>
                                 <td>{{ $user->email }}</td>
+								@if($user->attribute)
                                 <td style="white-space: nowrap;">({{ $user->attribute->dial_code }}) {{ $user->attribute->phone_number }}</td>
-                                <td>{{ $user->attribute->occupation }}</td>
-                                <td>{{ $user->attribute->position }}</td>
-                                <td>{{ $user->attribute->institution }}</td>
+								@else
+								<td>-</td>
+								@endif
+                                <td>{{ $user->attribute && $user->attribute->occupation }}</td>
+                                <td>{{ $user->attribute && $user->attribute->position }}</td>
+                                <td>{{ $user->attribute && $user->attribute->institution }}</td>
                                 <td><span class="badge {{ $user->status == 1 ? 'bg-success' : 'bg-danger' }}">{{ status($user->status) }}</span></td>
                                 <td align="center">
                                     <div class="btn-group">
