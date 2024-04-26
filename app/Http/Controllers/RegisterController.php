@@ -89,26 +89,32 @@ class RegisterController extends Controller
             $user_attribute->institution = $request->institution;
             $user_attribute->save();
 
-            // Login
-            Auth::login($user);
-            
-            // Add to visitors
-            if(Schema::hasTable('visitors')) {
-                $visitor = new Visitor;
-                $visitor->user_id = $user->id;
-                $visitor->ip_address = $request->ip();
-                $visitor->device = device_info();
-                $visitor->browser = browser_info();
-                $visitor->platform = platform_info();
-                $visitor->location = location_info($request->ip());
-                $visitor->save();
-            }
-            
-            // Set projects session
-            session()->put('projects', []);
+			if($user && $user_attribute) {
+				// Login
+				Auth::login($user);
 
-            // Redirect
-            return redirect()->route('member.dashboard');
+				// Add to visitors
+				if(Schema::hasTable('visitors')) {
+					$visitor = new Visitor;
+					$visitor->user_id = $user->id;
+					$visitor->ip_address = $request->ip();
+					$visitor->device = device_info();
+					$visitor->browser = browser_info();
+					$visitor->platform = platform_info();
+					$visitor->location = location_info($request->ip());
+					$visitor->save();
+				}
+
+				// Set projects session
+				session()->put('projects', []);
+
+				// Redirect
+				return redirect()->route('member.dashboard');
+			}
+			else {
+				// Redirect
+				return redirect()->route('auth.register');
+			}
         }
     }
 }
